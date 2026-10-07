@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="The Art Makan - Handmade & Custom Art. Specialized in ceramic mugs, original canvas paintings, aesthetic shirts, and decorative cushions.">
+    <title>The Art Makan - Handmade & Custom Art</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600&family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="logo">The Art Makan</div>
+        <ul class="nav-links">
+            <li><a href="#home">Home</a></li>
+            <li><a href="#categories">Shop</a></li>
+            <li><a href="#customization">Customization</a></li>
+            <li><a href="#reviews">Reviews</a></li>
+        </ul>
+        <div class="cart-icon" id="cart-icon">
+            <i class="fas fa-shopping-bag"></i>
+            <span class="cart-count">0</span>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <header id="home" class="hero" style="background-image: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.4)), url('hero_banner.jpg');">
+        <div class="hero-content">
+            <h1>Handmade & Custom Art</h1>
+            <p>Discover unique ceramic mugs, original canvas paintings, aesthetic apparel, and decorative cushions crafted with love.</p>
+            <a href="#categories" class="btn btn-primary">Shop Collection</a>
+        </div>
+    </header>
+
+    <!-- Categories Section -->
+    <section id="categories" class="categories section-padding">
+        <div class="container">
+            <h2 class="section-title">Shop by Category</h2>
+            <div class="grid">
+                <div class="category-card" onclick="addToCart('Custom Ceramic Mug', 25, 'category_mugs.jpg')">
+                    <img src="category_mugs.jpg" alt="Custom Mugs">
+                    <div class="category-info">
+                        <h3>Custom Mugs</h3>
+                        <p>$25.00</p>
+                        <button class="add-to-cart-btn" onclick="addToCart('Custom Ceramic Mug', 25, 'category_mugs.jpg')">Add to Cart</button>
+                    </div>
+                </div>
+                <div class="category-card" onclick="addToCart('Abstract Canvas Painting', 150, 'category_paintings.jpg')">
+                    <img src="category_paintings.jpg" alt="Paintings">
+                    <div class="category-info">
+                        <h3>Paintings</h3>
+                        <p>$150.00</p>
+                        <button class="add-to-cart-btn" onclick="addToCart('Abstract Canvas Painting', 150, 'category_paintings.jpg')">Add to Cart</button>
+                    </div>
+                </div>
+                <div class="category-card" onclick="addToCart('Aesthetic Printed Shirt', 35, 'category_apparel.jpg')">
+                    <img src="category_apparel.jpg" alt="Apparel">
+                    <div class="category-info">
+                        <h3>Apparel</h3>
+                        <p>$35.00</p>
+                        <button class="add-to-cart-btn" onclick="addToCart('Aesthetic Printed Shirt', 35, 'category_apparel.jpg')">Add to Cart</button>
+                    </div>
+                </div>
+                <div class="category-card" onclick="addToCart('Decorative Cushion', 40, 'category_cushions.jpg')">
+                    <img src="category_cushions.jpg" alt="Home Decor">
+                    <div class="category-info">
+                        <h3>Home Decor</h3>
+                        <p>$40.00</p>
+                        <button class="add-to-cart-btn" onclick="addToCart('Decorative Cushion', 40, 'category_cushions.jpg')">Add to Cart</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Customization Inquiry -->
+    <section id="customization" class="customization section-padding bg-light">
+        <div class="container">
+            <div class="customization-wrapper">
+                <div class="customization-text">
+                    <h2>Bring Your Vision to Life</h2>
+                    <p>Want a personalized mug, a custom painting, or a unique shirt design? We offer customization services tailored to your taste. Tell us about your idea!</p>
+                </div>
+                <form class="customization-form" onsubmit="submitForm(event)">
+                    <input type="text" placeholder="Your Name" required>
+                    <input type="email" placeholder="Your Email" required>
+                    <select required>
+                        <option value="" disabled selected>Select Product Type</option>
+                        <option value="mug">Ceramic Mug</option>
+                        <option value="painting">Canvas Painting</option>
+                        <option value="apparel">Apparel</option>
+                        <option value="decor">Home Decor</option>
+                    </select>
+                    <textarea placeholder="Describe your custom idea..." rows="4" required></textarea>
+                    <button type="submit" class="btn btn-secondary">Send Inquiry</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Customer Reviews -->
+    <section id="reviews" class="reviews section-padding">
+        <div class="container">
+            <h2 class="section-title">What Our Customers Say</h2>
+            <div class="reviews-grid">
+                <div class="review-card">
+                    <div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+                    <p>"The custom mug I ordered exceeded my expectations! The quality and the earthy tones are just beautiful."</p>
+                    <h4>- Sarah J.</h4>
+                </div>
+                <div class="review-card">
+                    <div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+                    <p>"I bought an abstract painting for my living room. It adds such a warm and cozy vibe. Highly recommend!"</p>
+                    <h4>- Michael T.</h4>
+                </div>
+                <div class="review-card">
+                    <div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i></div>
+                    <p>"The aesthetic shirt is so soft and comfortable. I love the minimalist design. Will order again."</p>
+                    <h4>- Emily R.</h4>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <p>&copy; 2026 The Art Makan. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Shopping Cart Modal -->
+    <div class="cart-overlay" id="cart-overlay"></div>
+    <div class="cart-sidebar" id="cart-sidebar">
+        <div class="cart-header">
+            <h2>Your Cart</h2>
+            <button class="close-cart" id="close-cart" aria-label="Close cart"><i class="fas fa-times"></i></button>
+        </div>
+        <div class="cart-items" id="cart-items">
+            <!-- Items will be injected here -->
+        </div>
+        <div class="cart-footer">
+            <div class="cart-total">
+                <span>Total:</span>
+                <span id="total-price">$0.00</span>
+            </div>
+            <button class="btn btn-primary checkout-btn">Checkout</button>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
