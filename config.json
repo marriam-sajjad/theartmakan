@@ -1,0 +1,11 @@
+{
+  "brandName": "The Art Makan",
+  "instagramShop": "https://instagram.com/the_art_makan",
+  "instagramPortfolio": "https://instagram.com/marriamsajjad_artistry",
+  "whatsappNumber": "966500000000",
+  "defaultLanguage": "ar",
+  "supportedLanguages": ["ar", "en"],
+  "baseCurrency": "SAR",
+  "vatRate": 0.15,
+  "freeShippingThresholdSAR": 250
+}

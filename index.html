@@ -1,155 +1,800 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ar" dir="rtl">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="The Art Makan - Handmade & Custom Art. Specialized in ceramic mugs, original canvas paintings, aesthetic shirts, and decorative cushions.">
-    <title>The Art Makan - Handmade & Custom Art</title>
-    <link rel="stylesheet" href="styles.css">
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600&family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="The Art Makan - Handmade & Custom Art Studio in Saudi Arabia. Arabic calligraphy, custom mugs, original canvas paintings, aesthetic apparel, and decorative cushions with worldwide shipping." />
+  <meta name="theme-color" content="#14171a" />
+  <title>The Art Makan | المكان للفنون - Handmade Art & Custom Craft Studio</title>
+
+  <!-- Optimized Preconnect for Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Naskh+Arabic:wght@400;600;700&display=swap" rel="stylesheet" />
+
+  <!-- SEO Structured Data (JSON-LD) with both Instagram accounts -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "ArtGallery",
+    "name": "The Art Makan | المكان للفنون",
+    "url": "https://theartmakan.com",
+    "description": "Handmade & Custom Art Studio based in Saudi Arabia specializing in original paintings, sculpted ceramic mugs, Arabic calligraphy, and personalized gifts.",
+    "address": {
+      "@type": "PostalAddress",
+      "addressCountry": "SA",
+      "addressRegion": "Riyadh & Jeddah"
+    },
+    "sameAs": [
+      "https://instagram.com/the_art_makan",
+      "https://instagram.com/marriamsajjad_artistry"
+    ]
+  }
+  </script>
+
+  <!-- Core Stylesheet -->
+  <link rel="stylesheet" href="styles.css" />
+
+  <!-- Fast In-Memory Fallback & Core Application Script -->
+  <script src="data-fallback.js" defer></script>
+  <script src="script.js" defer></script>
 </head>
 <body>
-    <!-- Navbar -->
-    <nav class="navbar">
-        <div class="logo">The Art Makan</div>
+
+  <!-- 1. Top Announcement Bar -->
+  <div class="announcement-bar" role="region" aria-label="Announcement">
+    <div class="container" data-i18n="announcement">
+      ✨ صُنع يدوياً في السعودية • شحن دولي سريع لجميع دول العالم • توصيل مجاني داخل المملكة للطلبات فوق 250 ر.س
+    </div>
+  </div>
+
+  <!-- 2. Sticky Site Header (Artfinder Gallery Inspired) -->
+  <header class="site-header" role="banner">
+    <div class="container">
+      <div class="header-top">
+        
+        <!-- Brand Logo -->
+        <a href="#home" class="brand-logo" aria-label="The Art Makan Home">
+          <span class="brand-title" data-i18n="brand_name">المكان للفنون</span>
+          <span class="brand-sub" data-i18n="brand_tagline">Handmade & Custom Art Studio • Saudi Arabia</span>
+        </a>
+
+        <!-- Search Bar -->
+        <div class="header-search">
+          <span class="search-icon" aria-hidden="true">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="11" cy="11" r="8"></circle>
+              <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+            </svg>
+          </span>
+          <input type="search" id="search-input" class="search-input" data-i18n-placeholder="search_placeholder" placeholder="ابحث عن لوحات، خط عربي، أكواب مخصصة..." aria-label="Search artwork" />
+        </div>
+
+        <!-- Controls: Language (AR/EN only), Currency, Shop Instagram, Cart -->
+        <div class="header-controls">
+          
+          <!-- Single Instagram Icon in Header (Shop Account Only) -->
+          <a href="https://instagram.com/the_art_makan" target="_blank" rel="noopener" class="header-ig-link" title="Shop Instagram: @the_art_makan" aria-label="Shop Instagram @the_art_makan">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+              <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+              <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+            </svg>
+          </a>
+
+          <!-- Language Selector (English & Arabic Only) -->
+          <div class="select-wrap">
+            <label for="lang-select" class="sr-only" data-i18n="language_label">Language</label>
+            <select id="lang-select" class="select-pill" aria-label="Select Language">
+              <option value="ar">العربية (AR)</option>
+              <option value="en">English (EN)</option>
+            </select>
+          </div>
+
+          <!-- Currency Selector -->
+          <div class="select-wrap">
+            <label for="curr-select" class="sr-only" data-i18n="currency_label">Currency</label>
+            <select id="curr-select" class="select-pill" aria-label="Select Currency">
+              <option value="SAR">SAR (ر.س)</option>
+              <option value="USD">USD ($)</option>
+              <option value="EUR">EUR (€)</option>
+              <option value="GBP">GBP (£)</option>
+              <option value="AED">AED (د.إ)</option>
+              <option value="PKR">PKR (Rs.)</option>
+              <option value="INR">INR (₹)</option>
+              <option value="KWD">KWD (د.ك)</option>
+              <option value="QAR">QAR (ر.ق)</option>
+              <option value="OMR">OMR (ر.ع)</option>
+              <option value="BHD">BHD (د.ب)</option>
+            </select>
+          </div>
+
+          <!-- Shopping Bag Button -->
+          <button type="button" id="cart-toggle-btn" class="cart-toggle-btn" aria-label="Open Shopping Bag">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path>
+              <line x1="3" y1="6" x2="21" y2="6"></line>
+              <path d="M16 10a4 4 0 0 1-8 0"></path>
+            </svg>
+            <span id="cart-badge" class="cart-badge">0</span>
+          </button>
+        </div>
+
+      </div>
+
+      <!-- Navigation Bar -->
+      <nav class="header-nav" aria-label="Primary Navigation">
         <ul class="nav-links">
-            <li><a href="#home">Home</a></li>
-            <li><a href="#categories">Shop</a></li>
-            <li><a href="#customization">Customization</a></li>
-            <li><a href="#reviews">Reviews</a></li>
+          <li><a href="#home" class="nav-link active" data-i18n="nav_home">الرئيسية</a></li>
+          <li><a href="#categories-section" class="nav-link" data-i18n="nav_categories">الأقسام</a></li>
+          <li><a href="#shop-section" class="nav-link" data-i18n="nav_shop">كل الأعمال</a></li>
+          <li><a href="#artist-section" class="nav-link" data-i18n="artist_about_title">عن الفنانة</a></li>
+          <li><a href="#shipping-section" class="nav-link" data-i18n="nav_shipping">الشحن والضريبة</a></li>
+          <li><a href="#reviews-section" class="nav-link" data-i18n="nav_reviews">آراء العملاء</a></li>
         </ul>
-        <div class="cart-icon" id="cart-icon">
-            <i class="fas fa-shopping-bag"></i>
-            <span class="cart-count">0</span>
-        </div>
-    </nav>
+        <a href="#custom-studio-section" class="nav-btn-custom" data-i18n="nav_custom_studio">
+          ✨ استوديو التخصيص
+        </a>
+      </nav>
+    </div>
+  </header>
 
-    <!-- Hero Section -->
-    <header id="home" class="hero" style="background-image: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.4)), url('hero_banner.jpg');">
-        <div class="hero-content">
-            <h1>Handmade & Custom Art</h1>
-            <p>Discover unique ceramic mugs, original canvas paintings, aesthetic apparel, and decorative cushions crafted with love.</p>
-            <a href="#categories" class="btn btn-primary">Shop Collection</a>
-        </div>
-    </header>
-
-    <!-- Categories Section -->
-    <section id="categories" class="categories section-padding">
-        <div class="container">
-            <h2 class="section-title">Shop by Category</h2>
-            <div class="grid">
-                <div class="category-card" onclick="addToCart('Custom Ceramic Mug', 25, 'category_mugs.jpg')">
-                    <img src="category_mugs.jpg" alt="Custom Mugs">
-                    <div class="category-info">
-                        <h3>Custom Mugs</h3>
-                        <p>$25.00</p>
-                        <button class="add-to-cart-btn" onclick="addToCart('Custom Ceramic Mug', 25, 'category_mugs.jpg')">Add to Cart</button>
-                    </div>
-                </div>
-                <div class="category-card" onclick="addToCart('Abstract Canvas Painting', 150, 'category_paintings.jpg')">
-                    <img src="category_paintings.jpg" alt="Paintings">
-                    <div class="category-info">
-                        <h3>Paintings</h3>
-                        <p>$150.00</p>
-                        <button class="add-to-cart-btn" onclick="addToCart('Abstract Canvas Painting', 150, 'category_paintings.jpg')">Add to Cart</button>
-                    </div>
-                </div>
-                <div class="category-card" onclick="addToCart('Aesthetic Printed Shirt', 35, 'category_apparel.jpg')">
-                    <img src="category_apparel.jpg" alt="Apparel">
-                    <div class="category-info">
-                        <h3>Apparel</h3>
-                        <p>$35.00</p>
-                        <button class="add-to-cart-btn" onclick="addToCart('Aesthetic Printed Shirt', 35, 'category_apparel.jpg')">Add to Cart</button>
-                    </div>
-                </div>
-                <div class="category-card" onclick="addToCart('Decorative Cushion', 40, 'category_cushions.jpg')">
-                    <img src="category_cushions.jpg" alt="Home Decor">
-                    <div class="category-info">
-                        <h3>Home Decor</h3>
-                        <p>$40.00</p>
-                        <button class="add-to-cart-btn" onclick="addToCart('Decorative Cushion', 40, 'category_cushions.jpg')">Add to Cart</button>
-                    </div>
-                </div>
+  <main>
+    <!-- 3. Hero Section (Gallery Aesthetic) -->
+    <section id="home" class="hero-section">
+      <div class="container">
+        <div class="hero-grid">
+          
+          <div class="hero-content">
+            <span class="hero-badge-tag" data-i18n="hero_badge">
+              🇸🇦 فن سعودي أصيل بأيدي حرفيين مستقلين
+            </span>
+            <h1 class="hero-heading" data-i18n="hero_title">
+              أعمال فنية أصلية وحرف يدوية مميزة تروي قصة جمال
+            </h1>
+            <p class="hero-desc" data-i18n="hero_desc">
+              من لوحات الخط العربي بماء الذهب وأكواب الصلصال اليدوية إلى الوسائد والملابس المطبوعة بحب. مصنوعة يدويًا في السعودية وشحن لجميع أنحاء العالم.
+            </p>
+            <div class="hero-actions">
+              <a href="#shop-section" class="btn btn-primary" data-i18n="hero_cta_shop">تصفح المجموعات</a>
+              <a href="#custom-studio-section" class="btn btn-secondary" data-i18n="hero_cta_custom">صمم قطعتك الخاصة</a>
             </div>
+
+            <!-- Instagram Channels (Shop & Artist Portfolio - Stacks on Mobile) -->
+            <div class="hero-social-buttons">
+              <a href="https://instagram.com/the_art_makan" target="_blank" rel="noopener" class="btn-ig-pill btn-ig-shop">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+                  <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+                  <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+                </svg>
+                <span data-i18n="shop_updates_btn">Shop updates: @the_art_makan</span>
+              </a>
+              <a href="https://instagram.com/marriamsajjad_artistry" target="_blank" rel="noopener" class="btn-ig-pill btn-ig-portfolio">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+                  <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+                  <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+                </svg>
+                <span data-i18n="my_art_portfolio_btn">My art portfolio: @marriamsajjad_artistry</span>
+              </a>
+            </div>
+          </div>
+
+          <div class="hero-visual">
+            <img src="images/hero_banner.jpg" alt="The Art Makan Studio" width="1100" height="550" fetchpriority="high" />
+          </div>
+
         </div>
+      </div>
     </section>
 
-    <!-- Customization Inquiry -->
-    <section id="customization" class="customization section-padding bg-light">
-        <div class="container">
-            <div class="customization-wrapper">
-                <div class="customization-text">
-                    <h2>Bring Your Vision to Life</h2>
-                    <p>Want a personalized mug, a custom painting, or a unique shirt design? We offer customization services tailored to your taste. Tell us about your idea!</p>
-                </div>
-                <form class="customization-form" onsubmit="submitForm(event)">
-                    <input type="text" placeholder="Your Name" required>
-                    <input type="email" placeholder="Your Email" required>
-                    <select required>
-                        <option value="" disabled selected>Select Product Type</option>
-                        <option value="mug">Ceramic Mug</option>
-                        <option value="painting">Canvas Painting</option>
-                        <option value="apparel">Apparel</option>
-                        <option value="decor">Home Decor</option>
-                    </select>
-                    <textarea placeholder="Describe your custom idea..." rows="4" required></textarea>
-                    <button type="submit" class="btn btn-secondary">Send Inquiry</button>
-                </form>
+    <!-- 4. Trust Strip -->
+    <section class="trust-strip" aria-label="Our Guarantees">
+      <div class="container">
+        <div class="trust-grid">
+          
+          <div class="trust-item">
+            <div class="trust-icon">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"></path>
+              </svg>
             </div>
+            <div class="trust-info">
+              <h4 data-i18n="trust_handmade">100% صُنع يدوي بحرفية</h4>
+              <p data-i18n="trust_handmade_desc">كل قطعة تُصنع بعناية فائقة بواسطة فنانين مستقلين</p>
+            </div>
+          </div>
+
+          <div class="trust-item">
+            <div class="trust-icon">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="12" cy="12" r="10"></circle>
+                <line x1="2" y1="12" x2="22" y2="12"></line>
+                <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path>
+              </svg>
+            </div>
+            <div class="trust-info">
+              <h4 data-i18n="trust_shipping">شحن وتوصيل عالمي</h4>
+              <p data-i18n="trust_shipping_desc">شحن سريع ومُتبع في جميع مدن السعودية ودولياً</p>
+            </div>
+          </div>
+
+          <div class="trust-item">
+            <div class="trust-icon">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="2" y="5" width="20" height="14" rx="2"></rect>
+                <line x1="2" y1="10" x2="22" y2="10"></line>
+              </svg>
+            </div>
+            <div class="trust-info">
+              <h4 data-i18n="trust_vat">متوافق مع هيئة الزكاة والضريبة</h4>
+              <p data-i18n="trust_vat_desc">أسعار واضحة وشاملة لضريبة القيمة المضافة 15%</p>
+            </div>
+          </div>
+
+          <div class="trust-item">
+            <div class="trust-icon">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <polygon points="14 2 18 6 7 17 3 17 3 13 14 2"></polygon>
+                <line x1="3" y1="22" x2="21" y2="22"></line>
+              </svg>
+            </div>
+            <div class="trust-info">
+              <h4 data-i18n="trust_custom">تخصيص كامل حسب طلبك</h4>
+              <p data-i18n="trust_custom_desc">كتابة أسمائك وصورك وعباراتك المفضلة باحترافية</p>
+            </div>
+          </div>
+
         </div>
+      </div>
     </section>
 
-    <!-- Customer Reviews -->
-    <section id="reviews" class="reviews section-padding">
-        <div class="container">
-            <h2 class="section-title">What Our Customers Say</h2>
-            <div class="reviews-grid">
-                <div class="review-card">
-                    <div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
-                    <p>"The custom mug I ordered exceeded my expectations! The quality and the earthy tones are just beautiful."</p>
-                    <h4>- Sarah J.</h4>
-                </div>
-                <div class="review-card">
-                    <div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
-                    <p>"I bought an abstract painting for my living room. It adds such a warm and cozy vibe. Highly recommend!"</p>
-                    <h4>- Michael T.</h4>
-                </div>
-                <div class="review-card">
-                    <div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i></div>
-                    <p>"The aesthetic shirt is so soft and comfortable. I love the minimalist design. Will order again."</p>
-                    <h4>- Emily R.</h4>
-                </div>
-            </div>
+    <!-- 5. Categories Navigation (All 9 Categories) -->
+    <section id="categories-section" class="section">
+      <div class="container">
+        <div class="section-head">
+          <div>
+            <h2 class="section-title" data-i18n="categories_title">المجموعات المختارة</h2>
+            <p class="section-subtitle" data-i18n="categories_subtitle">استكشف 9 تصنيفات فنية متخصصة للأعمال اليدوية والقطع المخصصة</p>
+          </div>
         </div>
+
+        <div class="categories-carousel">
+          <button type="button" class="cat-pill-btn active" data-cat="all">
+            <span class="cat-pill-icon">🎨</span>
+            <span class="cat-pill-name" data-i18n="cat_all">جميع الأعمال</span>
+          </button>
+          <button type="button" class="cat-pill-btn" data-cat="cushions">
+            <span class="cat-pill-icon">🛋️</span>
+            <span class="cat-pill-name" data-i18n="cat_cushions">وسائد مطبوعة</span>
+          </button>
+          <button type="button" class="cat-pill-btn" data-cat="custom-mugs">
+            <span class="cat-pill-icon">☕</span>
+            <span class="cat-pill-name" data-i18n="cat_custom_mugs">أكواب بالصور</span>
+          </button>
+          <button type="button" class="cat-pill-btn" data-cat="clay-mugs">
+            <span class="cat-pill-icon">🏺</span>
+            <span class="cat-pill-name" data-i18n="cat_clay_mugs">أكواب فخارية</span>
+          </button>
+          <button type="button" class="cat-pill-btn" data-cat="calligraphy-mugs">
+            <span class="cat-pill-icon">✒️</span>
+            <span class="cat-pill-name" data-i18n="cat_calligraphy_mugs">أكواب خط عربي</span>
+          </button>
+          <button type="button" class="cat-pill-btn" data-cat="paintings">
+            <span class="cat-pill-icon">🖼️</span>
+            <span class="cat-pill-name" data-i18n="cat_paintings">لوحات كانفاس</span>
+          </button>
+          <button type="button" class="cat-pill-btn" data-cat="3d-art">
+            <span class="cat-pill-icon">🏛️</span>
+            <span class="cat-pill-name" data-i18n="cat_3d_art">فن ثلاثي الأبعاد</span>
+          </button>
+          <button type="button" class="cat-pill-btn" data-cat="t-shirts">
+            <span class="cat-pill-icon">👕</span>
+            <span class="cat-pill-name" data-i18n="cat_tshirts">تي شيرت مخصص</span>
+          </button>
+          <button type="button" class="cat-pill-btn" data-cat="jewellery">
+            <span class="cat-pill-icon">💍</span>
+            <span class="cat-pill-name" data-i18n="cat_jewellery">مجوهرات يدوية</span>
+          </button>
+          <button type="button" class="cat-pill-btn" data-cat="arabic-calligraphy">
+            <span class="cat-pill-icon">📜</span>
+            <span class="cat-pill-name" data-i18n="cat_arabic_calligraphy">خط عربي فاخر</span>
+          </button>
+        </div>
+      </div>
     </section>
 
-    <!-- Footer -->
-    <footer>
-        <div class="container">
-            <p>&copy; 2026 The Art Makan. All Rights Reserved.</p>
+    <!-- 6. Shop Catalog Grid -->
+    <section id="shop-section" class="section" style="padding-top: 0;">
+      <div class="container">
+        
+        <!-- Toolbar: Count & Sort -->
+        <div class="toolbar">
+          <span id="products-count" class="toolbar-count">عرض المنتجات...</span>
+          <div class="toolbar-controls">
+            <label for="sort-select" class="sr-only" data-i18n="sort_by">Sort By</label>
+            <select id="sort-select" class="select-pill">
+              <option value="featured" data-i18n="sort_featured">الأعمال المميزة</option>
+              <option value="price_asc" data-i18n="sort_price_asc">السعر: من الأقل للأعلى</option>
+              <option value="price_desc" data-i18n="sort_price_desc">السعر: من الأعلى للأقل</option>
+              <option value="rating" data-i18n="sort_rating">الأعلى تقييماً</option>
+            </select>
+          </div>
         </div>
-    </footer>
 
-    <!-- Shopping Cart Modal -->
-    <div class="cart-overlay" id="cart-overlay"></div>
-    <div class="cart-sidebar" id="cart-sidebar">
-        <div class="cart-header">
-            <h2>Your Cart</h2>
-            <button class="close-cart" id="close-cart" aria-label="Close cart"><i class="fas fa-times"></i></button>
+        <!-- Dynamic Product Cards Grid -->
+        <div id="product-grid" class="product-grid">
+          <!-- Injected via JavaScript -->
         </div>
-        <div class="cart-items" id="cart-items">
-            <!-- Items will be injected here -->
+
+        <!-- Pagination / Load More Button -->
+        <div id="pagination-wrap" class="pagination-wrap" style="display: none;">
+          <button type="button" id="load-more-btn" class="btn btn-secondary" data-i18n="load_more">
+            عرض المزيد من المنتجات
+          </button>
         </div>
-        <div class="cart-footer">
-            <div class="cart-total">
-                <span>Total:</span>
-                <span id="total-price">$0.00</span>
+
+      </div>
+    </section>
+
+    <!-- 7. Interactive Custom Studio (CSS-only 3D Mockup Preview) -->
+    <section id="custom-studio-section" class="custom-studio-section">
+      <div class="container">
+        
+        <div class="section-head text-center" style="display: block; margin-bottom: 40px;">
+          <h2 class="section-title" data-i18n="studio_title">استوديو التخصيص التفاعلي المباشر</h2>
+          <p class="section-subtitle" data-i18n="studio_subtitle">صمم كوبك أو وسادتك أو قميصك المفضل وشاهد النتيجة فوراً في المعاينة الحية</p>
+        </div>
+
+        <div class="studio-grid">
+          
+          <!-- Studio Controls Form -->
+          <div class="studio-controls-card">
+            
+            <!-- 1. Product Type -->
+            <div class="studio-form-group">
+              <label class="studio-label" data-i18n="studio_choose_product">1. اختر نوع المنتج</label>
+              <div class="studio-type-pills">
+                <button type="button" class="studio-type-pill active" data-type="mug" data-i18n="studio_prod_mug">كوب سيراميك</button>
+                <button type="button" class="studio-type-pill" data-type="cushion" data-i18n="studio_prod_cushion">وسادة كتان</button>
+                <button type="button" class="studio-type-pill" data-type="shirt" data-i18n="studio_prod_shirt">تي شيرت قطني</button>
+                <button type="button" class="studio-type-pill" data-type="calligraphy" data-i18n="studio_prod_calligraphy">لوحة خط عربي</button>
+              </div>
             </div>
-            <button class="btn btn-primary checkout-btn">Checkout</button>
+
+            <!-- 2. Personalize Text -->
+            <div class="studio-form-group">
+              <label class="studio-label" for="studio-text-input" data-i18n="studio_custom_text">2. اكتب النص أو الاسم المخصص</label>
+              <input type="text" id="studio-text-input" class="studio-input" data-i18n-placeholder="studio_text_placeholder" placeholder="اكتب الاسم، أو الإهداء، أو البيت الشعري..." maxlength="45" />
+            </div>
+
+            <!-- 3. Font Style -->
+            <div class="studio-form-group">
+              <label class="studio-label" for="studio-font-select" data-i18n="studio_choose_font">3. نمط الخط</label>
+              <select id="studio-font-select" class="studio-input">
+                <option value="font-calligraphy" data-i18n="studio_font_calligraphy">خط فني يدوي</option>
+                <option value="font-modern" data-i18n="studio_font_modern">خط حديث وسلس</option>
+                <option value="font-serif" data-i18n="studio_font_serif">كلاسيكي أنيق</option>
+                <option value="font-nastaliq" data-i18n="studio_font_nastaliq">خط التعليق والنستعليق</option>
+              </select>
+            </div>
+
+            <!-- 4. Base Color -->
+            <div class="studio-form-group">
+              <label class="studio-label" data-i18n="studio_choose_color">4. اللون الأساسي</label>
+              <div class="color-palette">
+                <button type="button" class="color-dot active" data-color="#f7f3ec" style="background-color: #f7f3ec;" title="Classic Cream"></button>
+                <button type="button" class="color-dot" data-color="#ffffff" style="background-color: #ffffff;" title="Pure White"></button>
+                <button type="button" class="color-dot" data-color="#d9b48f" style="background-color: #d9b48f;" title="Warm Ochre"></button>
+                <button type="button" class="color-dot" data-color="#a3b19b" style="background-color: #a3b19b;" title="Sage Green"></button>
+                <button type="button" class="color-dot" data-color="#2b323b" style="background-color: #2b323b;" title="Slate Dark"></button>
+              </div>
+            </div>
+
+            <!-- 5. In-Browser Auto-Compressed Photo Upload (< 150KB) -->
+            <div class="studio-form-group">
+              <label class="studio-label" data-i18n="studio_upload_image">5. ارفع صورة أو شعار (ضغط تلقائي سريع)</label>
+              <label class="file-upload-box" for="studio-file-input">
+                <input type="file" id="studio-file-input" accept="image/*" class="sr-only" />
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="margin: 0 auto 6px; display: block; color: var(--text-muted);">
+                  <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                  <polyline points="17 8 12 3 7 8"></polyline>
+                  <line x1="12" y1="3" x2="12" y2="15"></line>
+                </svg>
+                <span data-i18n="studio_upload_note">حجم أقصى 5 ميجابايت • يتم ضغطه وتحسينه تلقائياً في المتصفح</span>
+              </label>
+            </div>
+
+            <!-- 6. Size Selection -->
+            <div class="studio-form-group">
+              <label class="studio-label" for="studio-size-select" data-i18n="studio_select_size">6. المقاس / الخامة</label>
+              <select id="studio-size-select" class="studio-input">
+                <option value="0">Standard Edition</option>
+                <option value="20">Large / Luxe Canvas Edition (+20 SAR)</option>
+                <option value="40">Collector Grand Edition (+40 SAR)</option>
+              </select>
+            </div>
+
+            <!-- Actions -->
+            <div style="display: flex; gap: 12px; margin-top: 24px; flex-wrap: wrap;">
+              <button type="button" id="studio-add-cart-btn" class="btn btn-primary" style="flex: 1;" data-i18n="studio_add_custom_cart">
+                إضافة الطلب المخصص للسلة
+              </button>
+              <button type="button" id="studio-whatsapp-btn" class="btn btn-whatsapp" data-i18n="studio_order_whatsapp_direct">
+                طلب التصميم المباشر عبر واتساب
+              </button>
+            </div>
+
+          </div>
+
+          <!-- Studio Live 3D CSS Mockup Stage -->
+          <div class="mockup-display-stage">
+            <div class="mockup-canvas-wrapper">
+              
+              <!-- CSS Mockup Shape -->
+              <div id="mockup-mug" class="css-mug-mockup">
+                <div class="mockup-art-area">
+                  <img id="mockup-image" src="" alt="Custom Artwork" class="mockup-custom-image" style="display: none;" />
+                  <span id="mockup-text" class="mockup-custom-text font-calligraphy">المكان للفنون</span>
+                </div>
+              </div>
+
+            </div>
+
+            <!-- Live Calculated Price -->
+            <div class="mockup-price-bar">
+              <span data-i18n="studio_estimated_price">السعر التقديري للتخصيص:</span>
+              <span id="mockup-price" class="mockup-price-val">55.00 SAR</span>
+              <small style="color: var(--saudi-green); font-weight: 600;" data-i18n="vat_included">شامل ضريبة 15%</small>
+            </div>
+          </div>
+
         </div>
+
+      </div>
+    </section>
+
+    <!-- 8. Shipping & VAT Information Section -->
+    <section id="shipping-section" class="section">
+      <div class="container">
+        <div class="section-head text-center" style="display: block; margin-bottom: 32px;">
+          <h2 class="section-title" data-i18n="nav_shipping">الشحن والضريبة</h2>
+          <p class="section-subtitle">شحن سريع ومباشر داخل المملكة العربية السعودية ولجميع دول العالم</p>
+        </div>
+
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 24px;">
+          
+          <div style="background: #ffffff; border: 1px solid var(--border-light); border-radius: var(--radius-md); padding: 24px;">
+            <h3 style="font-size: 1.125rem; font-weight: 700; margin-bottom: 8px;">🇸🇦 التوصيل داخل السعودية</h3>
+            <p style="color: var(--text-muted); font-size: 0.9375rem; margin-bottom: 12px;">
+              • توصيل مجاني لكافة مدن المملكة للطلبات 250 ر.س فأكثر.<br />
+              • رسوم توصيل مخفضة 25 ر.س للطلبات الأقل.<br />
+              • توصيل سريع خلال 2-4 أيام عمل عبر سمسا، أرامكس، وسبل.
+            </p>
+            <span class="vat-badge-tag">الدفع عند الاستلام متاح داخل السعودية</span>
+          </div>
+
+          <div style="background: #ffffff; border: 1px solid var(--border-light); border-radius: var(--radius-md); padding: 24px;">
+            <h3 style="font-size: 1.125rem; font-weight: 700; margin-bottom: 8px;">🌍 الشحن الدولي (الخليج والعالم)</h3>
+            <p style="color: var(--text-muted); font-size: 0.9375rem; margin-bottom: 12px;">
+              • دول الخليج (الإمارات، الكويت، قطر، البحرين، عمان): 45 ر.س (3-5 أيام).<br />
+              • الشحن لباقي دول العالم (أمريكا، أوروبا، آسيا): يبدأ من 85 ر.س.<br />
+              • تغليف فاخر مصفح ومقاوم للصدمات لضمان وصول التحف بسلامة.
+            </p>
+            <span style="font-size: 0.8125rem; color: var(--accent-gold); font-weight: 600;">تتبع دولي مباشر عبر DHL & FedEx</span>
+          </div>
+
+          <div style="background: #ffffff; border: 1px solid var(--border-light); border-radius: var(--radius-md); padding: 24px;">
+            <h3 style="font-size: 1.125rem; font-weight: 700; margin-bottom: 8px;">🧾 ضريبة القيمة المضافة (15% VAT)</h3>
+            <p style="color: var(--text-muted); font-size: 0.9375rem; margin-bottom: 12px;">
+              • جميع الأسعار المعروضة في المتجر شاملة رسمياً لضريبة القيمة المضافة 15%.<br />
+              • يتم إصدار فاتورة ضريبية رسمية لكل طلب معتمدة من هيئة الزكاة والضريبة والجمارك (ZATCA).<br />
+              • الرقم الضريبي: 310948271600003.
+            </p>
+            <span class="vat-badge-tag">فواتير إلكترونية متوافقة مع منصة فاتورة</span>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- 9. Customer Reviews -->
+    <section id="reviews-section" class="section" style="background-color: var(--bg-secondary);">
+      <div class="container">
+        <div class="section-head text-center" style="display: block; margin-bottom: 40px;">
+          <h2 class="section-title" data-i18n="reviews_title">يثق بنا عشاق الفن في السعودية والعالم</h2>
+          <p class="section-subtitle" data-i18n="reviews_subtitle">آراء وتجارب حقيقية من مقتني الأعمال الفنية والهدايا التذكارية</p>
+        </div>
+
+        <div class="reviews-grid">
+          
+          <div class="review-card">
+            <div class="review-stars">★★★★★</div>
+            <p class="review-quote">"طلبت لوحة آية الكرسي المذهبة بالذهب عيار 24، الدقة في التفاصيل والخط العربي لا توصف! تم التوصيل إلى الرياض خلال يومين بتغليف فاخر جداً."</p>
+            <div class="review-author">
+              <div class="review-avatar">ع</div>
+              <div class="review-meta">
+                <h5>عبدالله الشمري</h5>
+                <small>الرياض، المملكة العربية السعودية</small>
+              </div>
+            </div>
+          </div>
+
+          <div class="review-card">
+            <div class="review-stars">★★★★★</div>
+            <p class="review-quote">"The ceramic mug customized with my wedding date and Arabic calligraphy is a masterpiece. Delivered safely to London. Superb craftsmanship!"</p>
+            <div class="review-author">
+              <div class="review-avatar">S</div>
+              <div class="review-meta">
+                <h5>Sophia Martinez</h5>
+                <small>London, United Kingdom</small>
+              </div>
+            </div>
+          </div>
+
+          <div class="review-card">
+            <div class="review-stars">★★★★★</div>
+            <p class="review-quote">"مٹی کے کلے مگ اور کسٹم کشنز کا معیار بے مثال ہے۔ لائیو اسٹوڈیو میں پریویو دیکھ کر آرڈر کیا اور بالکل ویسا ہی ملا۔ بہترین سروس!"</p>
+            <div class="review-author">
+              <div class="review-avatar">ف</div>
+              <div class="review-meta">
+                <h5>فاروق اعجاز</h5>
+                <small>جدہ، المملكة العربية السعودية</small>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- 10. About the Artist Section (Written in First Person) -->
+    <section id="artist-section" class="section artist-section">
+      <div class="container">
+        <div class="artist-card-grid">
+          <span class="hero-badge-tag" data-i18n="artist_about_title">عن الفنانة</span>
+          <h2 class="section-title" data-i18n="artist_intro">أنا الفنانة وراء المكان للفنون</h2>
+          <p class="artist-quote" data-i18n="artist_about_desc">
+            أنا الفنانة وراء المكان للفنون. أبتكر لوحات فنية أصلية، وأكواب فخارية نباتية منحوتة، ولوحات خط عربي فاخرة بماء الذهب، وقطعاً مخصصة بشغف هنا في المملكة العربية السعودية. كل قطعة تُصنع بروح فنية خالصة تفيض بالجمال.
+          </p>
+          <div class="artist-links-row">
+            <a href="https://instagram.com/marriamsajjad_artistry" target="_blank" rel="noopener" class="btn btn-primary" data-i18n="my_art_portfolio_btn">
+              معرض أعمالي الفنية: @marriamsajjad_artistry
+            </a>
+            <a href="https://instagram.com/the_art_makan" target="_blank" rel="noopener" class="btn btn-secondary" data-i18n="shop_updates_btn">
+              تحديثات المتجر: @the_art_makan
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- 10. Slide-In Shopping Bag Drawer -->
+  <div id="cart-overlay" class="cart-drawer-overlay"></div>
+  <aside id="cart-drawer" class="cart-drawer" aria-label="Shopping Bag">
+    <div class="cart-drawer-header">
+      <h3 class="cart-drawer-title" data-i18n="cart_title">سلة المشتريات</h3>
+      <button type="button" id="cart-close-btn" class="cart-close-btn" aria-label="Close cart">✕</button>
     </div>
 
-    <script src="script.js"></script>
+    <div id="cart-shipping-meter" class="cart-shipping-meter">
+      <!-- Injected via script -->
+    </div>
+
+    <div id="cart-items-list" class="cart-drawer-items">
+      <!-- Items dynamically populated -->
+    </div>
+
+    <div class="cart-drawer-footer">
+      <div class="cart-summary-line">
+        <span data-i18n="cart_subtotal">المجموع الفرعي:</span>
+        <span id="cart-subtotal">0.00 SAR</span>
+      </div>
+      <div class="cart-summary-line">
+        <span data-i18n="cart_vat">ضريبة القيمة المضافة (15%):</span>
+        <span id="cart-vat">0.00 SAR</span>
+      </div>
+      <div class="cart-summary-line">
+        <span data-i18n="cart_shipping">الشحن التقديري:</span>
+        <span id="cart-shipping">0.00 SAR</span>
+      </div>
+      <div class="cart-summary-total">
+        <span data-i18n="cart_total">المجموع الإجمالي:</span>
+        <span id="cart-total">0.00 SAR</span>
+      </div>
+      <button type="button" id="cart-checkout-btn" class="btn btn-primary cart-checkout-btn" data-i18n="cart_checkout">
+        إتمام الطلب والدفع
+      </button>
+    </div>
+  </aside>
+
+  <!-- 11. Modals: Quick View & Checkout Form -->
+  <!-- Quick View Modal -->
+  <div id="quick-modal" class="modal-overlay" role="dialog" aria-modal="true">
+    <div class="modal-window">
+      <button type="button" class="modal-close-x" aria-label="Close modal">✕</button>
+      <div class="modal-content-inner">
+        <!-- Dynamically injected -->
+      </div>
+    </div>
+  </div>
+
+  <!-- Checkout Modal -->
+  <div id="checkout-modal" class="modal-overlay" role="dialog" aria-modal="true">
+    <div class="modal-window">
+      <button type="button" class="modal-close-x" aria-label="Close modal">✕</button>
+      <div class="modal-content-inner">
+        
+        <h2 class="checkout-section-title" data-i18n="checkout_title">الدفع الآمن</h2>
+        <p style="font-size: 0.875rem; color: var(--text-muted); margin-bottom: 24px;" data-i18n="checkout_subtitle">
+          دفع سهل وسريع عبر مدى، أبل باي، البطاقات، إس تي سي باي، أو الدفع عند الاستلام
+        </p>
+
+        <form id="checkout-form">
+          <div class="checkout-grid">
+            
+            <div>
+              <h3 style="font-size: 1rem; margin-bottom: 14px;" data-i18n="customer_info">بيانات العميل والتوصيل</h3>
+              <div class="form-row">
+                <label class="form-label" for="cust-name" data-i18n="full_name">الاسم الكامل</label>
+                <input type="text" id="cust-name" name="name" class="form-input" required />
+              </div>
+              <div class="form-row">
+                <label class="form-label" for="cust-phone" data-i18n="phone_number">رقم الجوال (الواتساب)</label>
+                <input type="tel" id="cust-phone" name="phone" placeholder="+966 5X XXX XXXX" class="form-input" required />
+              </div>
+              <div class="form-row">
+                <label class="form-label" for="cust-country" data-i18n="shipping_country">دولة الشحن</label>
+                <select id="cust-country" name="country" class="form-select">
+                  <option value="SA" selected>المملكة العربية السعودية (Saudi Arabia)</option>
+                  <option value="AE">الإمارات العربية المتحدة (UAE)</option>
+                  <option value="KW">الكويت (Kuwait)</option>
+                  <option value="QA">قطر (Qatar)</option>
+                  <option value="BH">البحرين (Bahrain)</option>
+                  <option value="OM">سلطنة عمان (Oman)</option>
+                  <option value="PK">Pakistan (پاکستان)</option>
+                  <option value="IN">India</option>
+                  <option value="GB">United Kingdom</option>
+                  <option value="US">United States</option>
+                  <option value="OTHER">Other Countries (Worldwide)</option>
+                </select>
+              </div>
+              <div class="form-row">
+                <label class="form-label" for="cust-city" data-i18n="shipping_city">المدينة / المنطقة</label>
+                <input type="text" id="cust-city" name="city" placeholder="الرياض، جدة، الدمام..." class="form-input" required />
+              </div>
+              <div class="form-row">
+                <label class="form-label" for="cust-address" data-i18n="street_address">العنوان الوطني / الحي واسم الشارع</label>
+                <input type="text" id="cust-address" name="address" class="form-input" required />
+              </div>
+            </div>
+
+            <div>
+              <h3 style="font-size: 1rem; margin-bottom: 14px;" data-i18n="payment_method">طريقة الدفع</h3>
+              <div class="payment-options-grid">
+                <label class="payment-option-label">
+                  <input type="radio" name="payment" value="Mada" checked />
+                  <span data-i18n="pay_mada">مدى (Mada)</span>
+                </label>
+                <label class="payment-option-label">
+                  <input type="radio" name="payment" value="Apple Pay" />
+                  <span data-i18n="pay_apple">Apple Pay</span>
+                </label>
+                <label class="payment-option-label">
+                  <input type="radio" name="payment" value="Cards" />
+                  <span data-i18n="pay_card">Visa / MC</span>
+                </label>
+                <label class="payment-option-label">
+                  <input type="radio" name="payment" value="STC Pay" />
+                  <span data-i18n="pay_stc">STC Pay</span>
+                </label>
+                <label class="payment-option-label">
+                  <input type="radio" name="payment" value="PayPal" />
+                  <span data-i18n="pay_paypal">PayPal</span>
+                </label>
+                <label class="payment-option-label">
+                  <input type="radio" name="payment" value="COD" />
+                  <span data-i18n="pay_cod">الدفع عند الاستلام</span>
+                </label>
+              </div>
+
+              <div style="margin-top: 24px; padding: 16px; background-color: var(--bg-subtle); border-radius: var(--radius-md); font-size: 0.8125rem; color: var(--text-muted);">
+                <p>🔒 دفع مشفر وآمن 100%. عند الضغط على تأكيد الطلب، سيتم توجيهك أو إرسال تفاصيل فاتورتك إلى الواتساب للتأكيد الفوري مع خدمة العملاء.</p>
+              </div>
+
+              <button type="submit" class="btn btn-whatsapp" style="width: 100%; margin-top: 16px;" data-i18n="order_via_whatsapp_btn">
+                إرسال تفاصيل الطلب عبر واتساب
+              </button>
+            </div>
+
+          </div>
+        </form>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast Notice -->
+  <div id="toast-notice" class="toast-notice" role="status" aria-live="polite">
+    تمت العملية بنجاح!
+  </div>
+
+  <!-- 12. Site Footer -->
+  <footer class="site-footer" role="contentinfo">
+    <div class="container">
+      <div class="footer-grid">
+        
+        <div class="footer-col">
+          <h4 data-i18n="brand_name">المكان للفنون</h4>
+          <p style="color: #b0aba1; font-size: 0.875rem; line-height: 1.6; margin-bottom: 16px;" data-i18n="footer_about">
+            المكان للفنون استوديو فني مستقل في المملكة العربية السعودية يقدم أروع التحف والمشغولات اليدوية ولوحات الخط العربي والديكور العصري مع شحن موثوق لكافة أرجاء العالم.
+          </p>
+          <p style="font-size: 0.8125rem; color: var(--accent-gold);" data-i18n="footer_saudi_vat">الرقم الضريبي: 310948271600003</p>
+        </div>
+
+        <div class="footer-col">
+          <h4 data-i18n="footer_quick_links">المجموعات الفنية</h4>
+          <ul class="footer-links">
+            <li><a href="#categories-section" data-i18n="cat_arabic_calligraphy">لوحات الخط العربي</a></li>
+            <li><a href="#categories-section" data-i18n="cat_custom_mugs">أكواب مخصصة بالصور</a></li>
+            <li><a href="#categories-section" data-i18n="cat_clay_mugs">أكواب فخارية يدوية</a></li>
+            <li><a href="#categories-section" data-i18n="cat_cushions">وسائد مطبوعة</a></li>
+            <li><a href="#categories-section" data-i18n="cat_paintings">لوحات كانفاس أصلية</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h4 data-i18n="footer_customer_care">خدمة العملاء</h4>
+          <ul class="footer-links">
+            <li><a href="#shipping-section" data-i18n="nav_shipping">سياسة الشحن والتوصيل</a></li>
+            <li><a href="#custom-studio-section" data-i18n="nav_custom_studio">استوديو التخصيص</a></li>
+            <li><a href="#shipping-section">ضريبة القيمة المضافة 15%</a></li>
+            <li><a href="https://wa.me/966500000000" target="_blank" rel="noopener">محادثة الدعم عبر واتساب</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h4 data-i18n="follow_my_work">الموقع والتواصل</h4>
+          <p style="color: #b0aba1; font-size: 0.875rem; line-height: 1.6; margin-bottom: 12px;" data-i18n="footer_location">
+            الرياض وجدة، المملكة العربية السعودية
+          </p>
+          <a href="https://instagram.com/the_art_makan" target="_blank" rel="noopener" class="footer-ig-link">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+              <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+              <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+            </svg>
+            <span data-i18n="instagram_shop_label">@the_art_makan (Shop)</span>
+          </a>
+          <a href="https://instagram.com/marriamsajjad_artistry" target="_blank" rel="noopener" class="footer-ig-link">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+              <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+              <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+            </svg>
+            <span data-i18n="instagram_portfolio_label">@marriamsajjad_artistry (Art Portfolio)</span>
+          </a>
+          <p style="color: #b0aba1; font-size: 0.875rem; margin-top: 10px;">
+            WhatsApp: +966 50 000 0000
+          </p>
+        </div>
+
+      </div>
+
+      <div class="footer-bottom">
+        <p data-i18n="footer_rights">جميع الحقوق محفوظة • المكان للفنون © 2026</p>
+        <div class="payment-badges-row">
+          <span class="pay-badge-pill">مدى Mada</span>
+          <span class="pay-badge-pill">Apple Pay</span>
+          <span class="pay-badge-pill">Visa / MC</span>
+          <span class="pay-badge-pill">STC Pay</span>
+          <span class="pay-badge-pill">COD</span>
+        </div>
+      </div>
+    </div>
+  </footer>
+
 </body>
 </html>

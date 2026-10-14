@@ -1,0 +1,451 @@
+[
+  {
+    "id": "cushion-01",
+    "category": "cushions",
+    "base_price_sar": 95,
+    "starting_from": true,
+    "badge": "Bestseller",
+    "rating": 4.9,
+    "reviews_count": 42,
+    "image": "images/category_cushions.jpg",
+    "has_customization": true,
+    "options": {
+      "sizes": [
+        {"name": "40x40 cm", "extra_sar": 0},
+        {"name": "50x50 cm", "extra_sar": 25},
+        {"name": "60x60 cm", "extra_sar": 45}
+      ],
+      "materials": ["Natural Belgian Linen", "Luxe Velvet Cotton", "Heavy Canvas"],
+      "allow_text": true,
+      "allow_photo": true
+    },
+    "translations": {
+      "en": {
+        "title": "Bespoke Botanical Linen Cushion",
+        "desc": "Hand-stitched textured decorative cushion featuring subtle earth-tone flora. Personalize with your custom embroidered name or message.",
+        "details": "Includes hypoallergenic inner pad, concealed zipper, machine washable cover."
+      },
+      "ar": {
+        "title": "وسادة كتان نباتية مطرزة حسب الطلب",
+        "desc": "وسادة ديكور فاخرة بخامة الكتان الطبيعي وتطريز أوراق نباتية بألوان ترابية هادئة. يمكنك إضافة اسم أو عبارة مخصصة.",
+        "details": "تشمل الحشوة الداخلية المضادة للحساسية، سحاب مخفي، قابلة للغسل."
+      },
+      "ur": {
+        "title": "کسٹم بوٹینیکل لینن کشن",
+        "desc": "خالص لینن فیبرک پر ہاتھ سے سجے پھول پودوں کے نقوش کے ساتھ آرائشی کشن۔ اپنا نام یا خصوصی پیغام لکھوائیں۔",
+        "details": "معیاری فلفی فِلر کے ساتھ، مخفی زپ، باآسانی دھونے کے قابل۔"
+      }
+    }
+  },
+  {
+    "id": "cushion-02",
+    "category": "cushions",
+    "base_price_sar": 110,
+    "starting_from": true,
+    "badge": "New Arrival",
+    "rating": 4.8,
+    "reviews_count": 19,
+    "image": "images/category_cushions.jpg",
+    "has_customization": true,
+    "options": {
+      "sizes": [
+        {"name": "45x45 cm", "extra_sar": 0},
+        {"name": "50x50 cm", "extra_sar": 20}
+      ],
+      "materials": ["Earthy Woven Texture", "Soft Brushed Twill"],
+      "allow_text": true,
+      "allow_photo": false
+    },
+    "translations": {
+      "en": {
+        "title": "Geometric Terracotta Accent Cushion",
+        "desc": "Hand-woven neutral terracotta cushion inspired by Najdi architectural geometries and warmth.",
+        "details": "Pure textured cotton yarn, heavy-duty stitching, durable luxury aesthetic."
+      },
+      "ar": {
+        "title": "وسادة تيراكوتا بنقوش نجدية هندسية",
+        "desc": "وسادة منسوجة يدوياً مستوحاة من الهندسة المعمارية النجدية العريقة بألوان دافئة.",
+        "details": "غزل قطني سميك عالي الجودة، تطريز يدوي متين، لمسة عصرية فاخرة."
+      },
+      "ur": {
+        "title": "جیومیٹرک نجد ٹیکسچر کشن",
+        "desc": "روایتی نجدی نقش و نگار سے مزین کشن جو کمرے کو ایک پُروقار اور گرم احساس بخشتا ہے۔",
+        "details": "عمدہ کاٹن تھریڈ، پائیدار بناوٹ، دیرپا خوبصورتی۔"
+      }
+    }
+  },
+  {
+    "id": "mug-custom-01",
+    "category": "custom-mugs",
+    "base_price_sar": 55,
+    "starting_from": true,
+    "badge": "Popular Gift",
+    "rating": 5.0,
+    "reviews_count": 87,
+    "image": "images/category_mugs.jpg",
+    "has_customization": true,
+    "options": {
+      "sizes": [
+        {"name": "Standard (330ml)", "extra_sar": 0},
+        {"name": "Large Mug (450ml)", "extra_sar": 15}
+      ],
+      "materials": ["Ceramic Matte Speckled", "Glossy White Pottery"],
+      "allow_text": true,
+      "allow_photo": true
+    },
+    "translations": {
+      "en": {
+        "title": "Personalized Artisan Name Mug",
+        "desc": "Hand-dipped ceramic mug with your custom printed name, anniversary date, or cherished portrait.",
+        "details": "Microwave and dishwasher safe, lead-free food-safe glaze, smooth comfortable handle."
+      },
+      "ar": {
+        "title": "كوب سيراميك يدوي مخصص بالاسم والصور",
+        "desc": "كوب فخار يدوي بطباعة حرارية دائمة لاسمك أو صورة تذكارية مع تفاصيل نباتية دقيقة.",
+        "details": "آمن للميكروويف وغسالة الصحون، طلاء خالي من الرصاص، مقبض مريح."
+      },
+      "ur": {
+        "title": "کسٹم پرسنلائزڈ نام اور تصویر والا مگ",
+        "desc": "ہاتھ سے بنا سیرامک مگ جس پر آپ کا نام، تصویر یا دل پسند شعر پائیدار انداز میں پرنٹ کیا جاتا ہے۔",
+        "details": "مائیکروویو اور ڈش واشر محفوظ، معیاری فوڈ گریڈ پالش، آرام دہ گرفت۔"
+      }
+    }
+  },
+  {
+    "id": "mug-clay-01",
+    "category": "clay-mugs",
+    "base_price_sar": 85,
+    "starting_from": false,
+    "badge": "Handmade",
+    "rating": 4.9,
+    "reviews_count": 34,
+    "image": "images/category_clay_mugs.jpg",
+    "has_customization": false,
+    "options": {
+      "sizes": [
+        {"name": "Artisan Wheel-Thrown (350ml)", "extra_sar": 0}
+      ],
+      "materials": ["Natural Stoneware Clay"],
+      "allow_text": false,
+      "allow_photo": false
+    },
+    "translations": {
+      "en": {
+        "title": "Sculpted Botanical Clay Art Mug",
+        "desc": "Authentic stoneware mug with hand-sculpted 3D botanical relief inspired by wild Arabian flora.",
+        "details": "Fired at 1250°C, textured earthy touch, unique artisanal piece with organic variations."
+      },
+      "ar": {
+        "title": "كوب صلصال يدوي بنقوش نباتية ثلاثية الأبعاد",
+        "desc": "كوب فخاري يدوي منحوت بنقوش ثلاثية الأبعاد بارزة لأزهار ونباتات الجزيرة البرية بألوان ترابية هادئة.",
+        "details": "محروق بدرجة 1250 مئوية، ملمس طبيعي دافئ، قطعة فريدة لا تتكرر."
+      },
+      "ur": {
+        "title": "مجسم کلے آرٹ سیرامک مگ",
+        "desc": "خالص قدرتی مٹی سے تراشا گیا منفرد مگ جس پر ابھرے ہوئے نباتاتی پھول پودے ہاتھ سے بنائے گئے ہیں۔",
+        "details": "اعلیٰ حرارت پر پکا ہوا مٹیریل، قدرتی خوبصورتی، ہر مگ ایک نادر شاہکار۔"
+      }
+    }
+  },
+  {
+    "id": "mug-calligraphy-01",
+    "category": "calligraphy-mugs",
+    "base_price_sar": 75,
+    "starting_from": true,
+    "badge": "24K Gold Leaf",
+    "rating": 5.0,
+    "reviews_count": 56,
+    "image": "images/category_calligraphy_mugs.jpg",
+    "has_customization": true,
+    "options": {
+      "sizes": [
+        {"name": "Standard (320ml)", "extra_sar": 0},
+        {"name": "Latte Bowl Mug (400ml)", "extra_sar": 15}
+      ],
+      "materials": ["Speckled Ceramic & 24K Liquid Gold Accent"],
+      "allow_text": true,
+      "allow_photo": false
+    },
+    "translations": {
+      "en": {
+        "title": "Handcrafted Arabic Calligraphy Mug",
+        "desc": "Artisan ceramic mug featuring masterfully penned Thuluth script ('الصبر مفتاح الفرج' or custom name) with metallic gold accents.",
+        "details": "Kiln-cured gold lettering, artisan rim dipping, food grade ceramic."
+      },
+      "ar": {
+        "title": "كوب خط عربي يدوي بلمسات ذهبية",
+        "desc": "كوب فخاري راقٍ مزين بخط الثلث العربي الأصيل ولمسات الذهب البراق. يمكن كتابة اسمك أو عبارتك المفضلة.",
+        "details": "كتابة ذهبية مثبتة بالحرارة، حافة فخارية مريحة، آمن للاستخدام الغذائي."
+      },
+      "ur": {
+        "title": "ہینڈ میڈ عربی خطاطی مگ گولڈ ٹچ",
+        "desc": "عربی رسم الخط کے شاندار نمونے اور سنہرے نقوش کے ساتھ تیار کردہ سیرامک مگ۔ اپنی مرضی کا نام بھی لکھوائیں۔",
+        "details": "مضبوط پائیدار سنہری لکھائی، ہاتھ کی بنی ساخت، پروقار تحفہ۔"
+      }
+    }
+  },
+  {
+    "id": "painting-01",
+    "category": "paintings",
+    "base_price_sar": 380,
+    "starting_from": true,
+    "badge": "Original Canvas",
+    "rating": 5.0,
+    "reviews_count": 21,
+    "image": "images/category_paintings.jpg",
+    "has_customization": true,
+    "options": {
+      "sizes": [
+        {"name": "50x60 cm Framed", "extra_sar": 0},
+        {"name": "80x100 cm Gallery Wrap", "extra_sar": 180},
+        {"name": "100x120 cm Exhibition Scale", "extra_sar": 340}
+      ],
+      "materials": ["Original Heavy Acrylic on Italian Linen", "Textured Mixed Media"],
+      "allow_text": false,
+      "allow_photo": false
+    },
+    "translations": {
+      "en": {
+        "title": "'Desert Echoes' Original Abstract Painting",
+        "desc": "One-of-a-kind original textured acrylic on Belgian canvas. Earthy ochre, sage green, and warm clay inspired by Saudi mountain landscapes.",
+        "details": "Comes signed by the artist, with certificate of authenticity, ready to hang."
+      },
+      "ar": {
+        "title": "لوحة أصلية 'أصداء الصحراء' كانفاس",
+        "desc": "لوحة تشكيلية أصلية بملمس بارز وألوان الأوكر والرمل ودرجات المريمية المستوحاة من جبال وسهول المملكة.",
+        "details": "موقعة من الفنان، مرفقة بشهادة أصالة معتمدة، جاهزة للتعليق الفوري."
+      },
+      "ur": {
+        "title": "اصل کینوس پینٹنگ 'صحرائی صدائیں'",
+        "desc": "خالص اطالوی کینوس پر ایکریلی اور ٹیکسچر کا حسین امتزاج۔ سعودی پہاڑوں اور ریت کے دلکش رنگوں کی عکاسی۔",
+        "details": "آرٹسٹ کے دستخط اور اصلیت کی سند کے ساتھ، وال ہینگنگ کے لیے تیار۔"
+      }
+    }
+  },
+  {
+    "id": "art-3d-01",
+    "category": "3d-art",
+    "base_price_sar": 420,
+    "starting_from": true,
+    "badge": "Sculptural Art",
+    "rating": 4.9,
+    "reviews_count": 17,
+    "image": "images/category_3d_art.jpg",
+    "has_customization": true,
+    "options": {
+      "sizes": [
+        {"name": "60x60 cm Square", "extra_sar": 0},
+        {"name": "80x80 cm Grand", "extra_sar": 210},
+        {"name": "100x100 cm Statement Piece", "extra_sar": 390}
+      ],
+      "materials": ["Mineral Plaster Relief on Solid Birch Panel"],
+      "allow_text": false,
+      "allow_photo": false
+    },
+    "translations": {
+      "en": {
+        "title": "Minimalist Geometric 3D Relief Sculpture",
+        "desc": "Textured architectural plaster wall relief capturing shifting daylight shadows with high-end gallery presence.",
+        "details": "Hand-moulded archival mineral gypsum, custom floating solid oak frame included."
+      },
+      "ar": {
+        "title": "عمل فني ثلاثي الأبعاد جداري بارز",
+        "desc": "منحوتة جدارية هندسية من الجبس المعدني والطبقات البارزة التي تتفاعل مع الضوء والظلال بأسلوب مودرن راقٍ.",
+        "details": "مصبوب يدوياً بمواد متينة أرشيفية، يشمل إطار خشب السنديان الطبيعي العائم."
+      },
+      "ur": {
+        "title": "تھری ڈی مجسم ریلیف وال اسکلپچر",
+        "desc": "ماڈرن گیلری اسٹائل میں بنا ہوا تھری ڈی ابھرا ہوا پلاسٹر وال آرٹ جو روشنی اور سائے کے ساتھ جاذب نظر لگتا ہے۔",
+        "details": "ٹھوس برچ بورڈ پر تیار کردہ، پریمیم اوک فلوٹنگ فریم کے ساتھ۔"
+      }
+    }
+  },
+  {
+    "id": "tshirt-01",
+    "category": "t-shirts",
+    "base_price_sar": 89,
+    "starting_from": true,
+    "badge": "100% Organic",
+    "rating": 4.8,
+    "reviews_count": 63,
+    "image": "images/category_apparel.jpg",
+    "has_customization": true,
+    "options": {
+      "sizes": [
+        {"name": "S", "extra_sar": 0},
+        {"name": "M", "extra_sar": 0},
+        {"name": "L", "extra_sar": 0},
+        {"name": "XL", "extra_sar": 10},
+        {"name": "XXL", "extra_sar": 15}
+      ],
+      "materials": ["100% Combed Heavy Cotton (240 GSM)"],
+      "allow_text": true,
+      "allow_photo": true
+    },
+    "translations": {
+      "en": {
+        "title": "Aesthetic Sage Floral Cotton T-Shirt",
+        "desc": "Oversized silhouette cut from 240 GSM organic breathable cotton with delicate earth-tone screen print or custom artwork.",
+        "details": "Pre-shrunk, eco-friendly inks, reinforced collar ribbing, unisex fit."
+      },
+      "ar": {
+        "title": "تي شيرت قطني فاخر بطباعة زهرية هادئة",
+        "desc": "قصة مريحة (أوفر سايز) مصنوعة من القطن العضوي 240 غرام بألوان ترابية مهدئة وطباعة حريرية تدوم طويلاً.",
+        "details": "معالج ضد الانكماش، أحبار مائية صديقة للبيئة، ياقة مزدوجة مدعمة، للجنسين."
+      },
+      "ur": {
+        "title": "آرٹسٹک پرنٹڈ کاٹن ٹی شرٹ",
+        "desc": "خالص آرگینک کاٹن سے بنی کشادہ اوور سائزڈ ٹی شرٹ جس پر قدرتی رنگوں کا حسین پرنٹ یا آپ کا کسٹم ڈیزائن ہے۔",
+        "details": "دھلائی کے بعد سکڑنے سے محفوظ، نرم اور آرام دہ، ماحول دوست پائیدار پرنٹ۔"
+      }
+    }
+  },
+  {
+    "id": "jewellery-01",
+    "category": "jewellery",
+    "base_price_sar": 160,
+    "starting_from": false,
+    "badge": "Limited Edition",
+    "rating": 5.0,
+    "reviews_count": 29,
+    "image": "images/category_jewellery.jpg",
+    "has_customization": false,
+    "options": {
+      "sizes": [
+        {"name": "Standard 45cm Chain + 5cm Extender", "extra_sar": 0}
+      ],
+      "materials": ["Raw Natural Opal & Hammered Brass / 18K Gold Plated"],
+      "allow_text": false,
+      "allow_photo": false
+    },
+    "translations": {
+      "en": {
+        "title": "Raw Gemstone Hammered Pendant Necklace",
+        "desc": "Hand-forged brass casing setting a natural iridescent opal stone, suspended on a fine artisanal chain.",
+        "details": "Each natural stone is organically unique, hypoallergenic, presented in luxury linen pouch."
+      },
+      "ar": {
+        "title": "عقد بحجر كريم خام مع إطار نحاسي مطروق",
+        "desc": "قلادة ساحرة مصنوعة يدوياً تتوسطها جوهرة أوبال طبيعية بإطار نحاسي مطروق بمهارة عالية ومطلي بالذهب.",
+        "details": "كل حجر طبيعي فريد بنوعيته وألوانه، خالية من النيكل، تأتي في حقيبة مخملية فاخرة."
+      },
+      "ur": {
+        "title": "دستکاری قدرتی رتن پینڈنٹ چین",
+        "desc": "ہاتھ سے تراشے گئے قدرتی اوپل پتھر اور سنہرے پیتل کے امتزاج سے بنا شاندار گلے کا ہار۔",
+        "details": "جلد کے لیے محفوظ، اینٹی الرجک، شاندار مخملی پاؤچ میں محفوظ۔"
+      }
+    }
+  },
+  {
+    "id": "calligraphy-01",
+    "category": "arabic-calligraphy",
+    "base_price_sar": 350,
+    "starting_from": true,
+    "badge": "Master Calligrapher",
+    "rating": 5.0,
+    "reviews_count": 48,
+    "image": "images/category_arabic_calligraphy.jpg",
+    "has_customization": true,
+    "options": {
+      "sizes": [
+        {"name": "A3 (30x42 cm) Framed", "extra_sar": 0},
+        {"name": "50x70 cm Museum Glass", "extra_sar": 180},
+        {"name": "70x100 cm Grand Exhibition", "extra_sar": 320}
+      ],
+      "materials": ["Textured Handmade Rag Paper & 24K Gold Leaf"],
+      "allow_text": true,
+      "allow_photo": false
+    },
+    "translations": {
+      "en": {
+        "title": "Ayat Al-Kursi 24K Gold Leaf Calligraphy",
+        "desc": "Exquisite Islamic calligraphy in classical Thuluth script illuminated with hand-applied 24K gold foil on deckle-edge artisan paper.",
+        "details": "Penned by award-winning Saudi master calligrapher, archival UV protected glass, bespoke black frame."
+      },
+      "ar": {
+        "title": "لوحة آية الكرسي بخط الثلث وورق الذهب الخالص",
+        "desc": "عمل فني إسلامي رفيع المستوى مكتوب يدوياً بخط الثلث الجلي ومذهب بورق الذهب عيار 24 على ورق يدوي معتق بحواف طبيعية.",
+        "details": "مكتوبة بيد خطاط سعودي معتمد، زجاج مضاد للأشعة فوق البنفسجية لحفظ الألوان، إطار أسود فاخر."
+      },
+      "ur": {
+        "title": "آیت الکرسی خالص 24K گولڈ لیف خطاطی",
+        "desc": "روایتی خط ثلث میں لکھی گئی باوقار خطاطی جس پر سونے کا اصل ورق ہاتھ سے لگایا گیا ہے۔ پائیدار قدرتی پیپر پر سجا شاہکار۔",
+        "details": "سعودی ماسٹر خطاط کی تخلیق، یو وی پروٹیکٹڈ شیشہ، پریمیم بلیک گیلری فریم۔"
+      }
+    }
+  },
+  {
+    "id": "calligraphy-02",
+    "category": "arabic-calligraphy",
+    "base_price_sar": 220,
+    "starting_from": true,
+    "badge": "Custom Name Art",
+    "rating": 4.9,
+    "reviews_count": 76,
+    "image": "images/category_arabic_calligraphy.jpg",
+    "has_customization": true,
+    "options": {
+      "sizes": [
+        {"name": "30x40 cm Framed", "extra_sar": 0},
+        {"name": "40x50 cm Framed", "extra_sar": 75}
+      ],
+      "materials": ["Archival Heavy Cotton Paper & Liquid Gold Ink"],
+      "allow_text": true,
+      "allow_photo": false
+    },
+    "translations": {
+      "en": {
+        "title": "Custom Arabic Family Name Calligraphy",
+        "desc": "Commission your family surname, couple names, or bespoke Quranic verse penned exclusively for your home.",
+        "details": "Includes personalized draft proof before final ink and framing."
+      },
+      "ar": {
+        "title": "مخطوطة مخصصة لاسم العائلة أو الزوجين",
+        "desc": "اطلب كتابة اسمك أو اسم عائلتك أو إهداء زواج مميز بخط عربي يدوي أصيل مع تطعيم بالذهب.",
+        "details": "نرسل لك بروفة الكترونية للاعتماد قبل التنفيذ النهائي والتأطير."
+      },
+      "ur": {
+        "title": "کسٹم خاندانی نام یا کپل نیم خطاطی",
+        "desc": "اپنے گھر کے لیے اپنے خاندانی نام، دولہا دلہن کے نام یا پسندیدہ شعر کی خصوصی خطاطی کروائیں۔",
+        "details": "حتمی فریم تیار کرنے سے پہلے منظوری کے لیے ڈیزائن دکھایا جاتا ہے۔"
+      }
+    }
+  },
+  {
+    "id": "mug-custom-02",
+    "category": "custom-mugs",
+    "base_price_sar": 60,
+    "starting_from": true,
+    "badge": "Valentine & Wedding",
+    "rating": 4.9,
+    "reviews_count": 52,
+    "image": "images/category_mugs.jpg",
+    "has_customization": true,
+    "options": {
+      "sizes": [
+        {"name": "330ml Classic", "extra_sar": 0},
+        {"name": "Pair Set (2 Mugs)", "extra_sar": 50}
+      ],
+      "materials": ["Satin Ceramic Glaze"],
+      "allow_text": true,
+      "allow_photo": true
+    },
+    "translations": {
+      "en": {
+        "title": "Minimalist Couple Initial Ceramic Mug",
+        "desc": "Modern speckled stoneware mug personalized with intertwined monogram initials and heartfelt date.",
+        "details": "Scratch-resistant print, heat-treated ceramic, comes in craft gift box."
+      },
+      "ar": {
+        "title": "كوب سيراميك بحروف وأسماء الشريكين",
+        "desc": "كوب فخاري منقط بأسلوب عصري يجمع الحروف الأولى للزوجين مع تاريخ الذكرى بلمسة حب أنيقة.",
+        "details": "مقاوم للخدش، عالي التحمل للحرارة، يُسلم في علبة إهداء فاخرة."
+      },
+      "ur": {
+        "title": "کپل انیشیل مونوگرام کسٹم مگ",
+        "desc": "دونوں کے نام کے پہلے حروف اور خاص تاریخ کے ساتھ خوبصورت کسٹم مگ، بہترین تحفہ۔",
+        "details": "خراب نہ ہونے والا معیاری پرنٹ، تحفے کے لیے دلکش باکس پیکنگ۔"
+      }
+    }
+  }
+]
