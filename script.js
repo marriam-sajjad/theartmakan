@@ -109,6 +109,15 @@
     DOM.quickModal = document.getElementById('quick-modal');
     DOM.checkoutModal = document.getElementById('checkout-modal');
     DOM.toast = document.getElementById('toast-notice');
+
+    // Mobile Navigation Elements
+    DOM.mobileMenuToggle = document.getElementById('mobile-menu-toggle');
+    DOM.mobileMenuClose = document.getElementById('mobile-menu-close');
+    DOM.mobileNavOverlay = document.getElementById('mobile-nav-overlay');
+    DOM.mobileNavDrawer = document.getElementById('mobile-nav-drawer');
+    DOM.mobileNavLinks = document.querySelectorAll('.mobile-nav-link, .mobile-btn-custom');
+    DOM.mobileLangSelect = document.getElementById('mobile-lang-select');
+    DOM.mobileCurrSelect = document.getElementById('mobile-curr-select');
   }
 
   /* -------------------------------------------------------------------------
@@ -137,6 +146,7 @@
     STATE.lang = newLang;
     localStorage.setItem('artmakan_lang', newLang);
     if (DOM.langSelect) DOM.langSelect.value = newLang;
+    if (DOM.mobileLangSelect) DOM.mobileLangSelect.value = newLang;
 
     // Apply RTL / LTR layout
     const isRTL = newLang === 'ar';
@@ -213,6 +223,7 @@
     STATE.currency = curr;
     localStorage.setItem('artmakan_curr', curr);
     if (DOM.currSelect) DOM.currSelect.value = curr;
+    if (DOM.mobileCurrSelect) DOM.mobileCurrSelect.value = curr;
 
     renderProducts();
     renderCart();
@@ -732,11 +743,11 @@
     }
 
     modalContent.innerHTML = `
-      <div style="display: grid; grid-template-columns: 1fr 1.2fr; gap: 28px; align-items: start;">
-        <div>
-          <img src="${prod.image}" alt="${tr.title}" style="width: 100%; border-radius: var(--radius-md); aspect-ratio: 1/1; object-fit: cover;" />
+      <div class="quick-modal-grid">
+        <div class="quick-modal-media">
+          <img src="${prod.image}" alt="${tr.title}" />
         </div>
-        <div>
+        <div class="quick-modal-info">
           <span class="product-category-name">${t(`cat_${prod.category.replace('-', '_')}`)}</span>
           <h2 style="font-size: 1.5rem; margin-bottom: 8px;">${tr.title}</h2>
           <p style="font-size: 1.375rem; font-weight: 700; color: var(--text-main); margin-bottom: 12px;">
@@ -748,7 +759,7 @@
           ${sizeOptionsHTML}
           ${customInputHTML}
 
-          <div style="display: flex; gap: 12px; margin-top: 24px;">
+          <div class="quick-modal-actions">
             <button type="button" class="btn btn-primary" id="quick-add-btn" style="flex: 1;">
               ${t('add_to_cart')}
             </button>
@@ -903,6 +914,36 @@
       DOM.currSelect.addEventListener('change', (e) => setCurrency(e.target.value));
     }
 
+    // Mobile Navigation Drawer Events
+    function openMobileNav() {
+      document.body.classList.add('mobile-nav-open');
+      if (DOM.mobileMenuToggle) DOM.mobileMenuToggle.setAttribute('aria-expanded', 'true');
+      if (DOM.mobileNavDrawer) DOM.mobileNavDrawer.setAttribute('aria-hidden', 'false');
+    }
+
+    function closeMobileNav() {
+      document.body.classList.remove('mobile-nav-open');
+      if (DOM.mobileMenuToggle) DOM.mobileMenuToggle.setAttribute('aria-expanded', 'false');
+      if (DOM.mobileNavDrawer) DOM.mobileNavDrawer.setAttribute('aria-hidden', 'true');
+    }
+
+    if (DOM.mobileMenuToggle) DOM.mobileMenuToggle.addEventListener('click', openMobileNav);
+    if (DOM.mobileMenuClose) DOM.mobileMenuClose.addEventListener('click', closeMobileNav);
+    if (DOM.mobileNavOverlay) DOM.mobileNavOverlay.addEventListener('click', closeMobileNav);
+
+    if (DOM.mobileNavLinks) {
+      DOM.mobileNavLinks.forEach(link => {
+        link.addEventListener('click', closeMobileNav);
+      });
+    }
+
+    if (DOM.mobileLangSelect) {
+      DOM.mobileLangSelect.addEventListener('change', (e) => setLanguage(e.target.value));
+    }
+    if (DOM.mobileCurrSelect) {
+      DOM.mobileCurrSelect.addEventListener('change', (e) => setCurrency(e.target.value));
+    }
+
     // Cart Drawer Toggle
     if (DOM.cartToggleBtn) DOM.cartToggleBtn.addEventListener('click', openCart);
     if (DOM.cartCloseBtn) DOM.cartCloseBtn.addEventListener('click', closeCart);
@@ -952,29 +993,40 @@
     if (DOM.productGrid) {
       DOM.productGrid.addEventListener('click', (e) => {
         const btn = e.target.closest('button');
-        if (!btn) return;
-        const action = btn.getAttribute('data-action');
-        const prodId = btn.getAttribute('data-id');
+        if (btn) {
+          const action = btn.getAttribute('data-action');
+          const prodId = btn.getAttribute('data-id');
 
-        if (action === 'quick-view') {
-          openQuickView(prodId);
-        } else if (action === 'add-cart') {
-          const prod = STATE.products.find(p => p.id === prodId);
-          if (prod) {
-            const tr = prod.translations[STATE.lang] || prod.translations.en || {};
-            addToCart({
-              id: prod.id,
-              title: tr.title,
-              priceSAR: prod.base_price_sar,
-              image: prod.image,
-              options: '',
-              quantity: 1
-            });
-            showToast(t('toast_added_to_cart'));
+          if (action === 'quick-view') {
+            openQuickView(prodId);
+          } else if (action === 'add-cart') {
+            const prod = STATE.products.find(p => p.id === prodId);
+            if (prod) {
+              const tr = prod.translations[STATE.lang] || prod.translations.en || {};
+              addToCart({
+                id: prod.id,
+                title: tr.title,
+                priceSAR: prod.base_price_sar,
+                image: prod.image,
+                options: '',
+                quantity: 1
+              });
+              showToast(t('toast_added_to_cart'));
+            }
+          } else if (action === 'whatsapp-order') {
+            const prod = STATE.products.find(p => p.id === prodId);
+            if (prod) sendDirectWhatsAppOrder(prod, null, null);
           }
-        } else if (action === 'whatsapp-order') {
-          const prod = STATE.products.find(p => p.id === prodId);
-          if (prod) sendDirectWhatsAppOrder(prod, null, null);
+          return;
+        }
+
+        // Tapping card image or title opens Quick View (ergonomic mobile experience)
+        const card = e.target.closest('.product-card');
+        const isImage = e.target.closest('.product-image-wrapper');
+        const isTitle = e.target.closest('.product-title');
+        if (card && (isImage || isTitle)) {
+          const prodId = card.getAttribute('data-id');
+          if (prodId) openQuickView(prodId);
         }
       });
     }
