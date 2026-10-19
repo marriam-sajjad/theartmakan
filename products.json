@@ -412,6 +412,82 @@
     }
   },
   {
+    "id": "calligraphy-03",
+    "category": "arabic-calligraphy",
+    "base_price_sar": 250,
+    "starting_from": true,
+    "badge": "Handmade Resin",
+    "rating": 5.0,
+    "reviews_count": 28,
+    "image": "images/calligraphy1.jpg",
+    "has_customization": true,
+    "options": {
+      "sizes": [
+        {"name": "30x30 cm Square", "extra_sar": 0},
+        {"name": "40x40 cm Gallery Canvas", "extra_sar": 80},
+        {"name": "50x50 cm Statement Piece", "extra_sar": 160}
+      ],
+      "materials": ["Epoxy Resin & 24K Gold Leaf on Solid Wood Canvas"],
+      "allow_text": true,
+      "allow_photo": false
+    },
+    "translations": {
+      "en": {
+        "title": "Resin & Gold Leaf Calligraphy",
+        "desc": "Stunning handcrafted Arabic calligraphy preserved in crystal clear epoxy resin with genuine shimmering gold leaf accents on solid wood.",
+        "details": "UV-resistant high-gloss resin, ready to hang, handmade in Saudi Arabia."
+      },
+      "ar": {
+        "title": "لوحة خط عربي بالريزن وورق الذهب",
+        "desc": "لوحة فنية فاخرة تجمع بين سحر الخط العربي ولمعان ورق الذهب عيار 24 مع طبقات الريزن الشفاف على خشب متين.",
+        "details": "مقاومة للأشعة فوق البنفسجية بلمعان زجاجي فائق، جاهزة للتعليق مباشرة، صُنع يدوي في السعودية."
+      },
+      "ur": {
+        "title": "ریزین اور گولڈ لیف اسلامی خطاطی",
+        "desc": "خالص لکڑی کے کینوس پر چمکدار 24K گولڈ لیف اور کرسٹل کلیئر ریزن کی تہوں سے مزین باوقار اسلامی خطاطی۔",
+        "details": "یو وی ریزسٹنٹ ہائی گلوس فنش، فوری لٹکانے کے لیے تیار، سعودی کاریگروں کی ہاتھ سے بنائی گئی تخلیق۔"
+      }
+    }
+  },
+  {
+    "id": "calligraphy-04",
+    "category": "arabic-calligraphy",
+    "base_price_sar": 350,
+    "starting_from": true,
+    "badge": "Original Canvas",
+    "rating": 4.9,
+    "reviews_count": 34,
+    "image": "images/art4.jpg",
+    "has_customization": true,
+    "options": {
+      "sizes": [
+        {"name": "50x70 cm Canvas", "extra_sar": 0},
+        {"name": "70x100 cm Large Canvas", "extra_sar": 150},
+        {"name": "90x120 cm Statement Canvas", "extra_sar": 300}
+      ],
+      "materials": ["Heavy 380gsm Cotton Canvas", "Resin & Architectural Texture Paste", "Acrylic & Gold Accents"],
+      "allow_text": true,
+      "allow_photo": false
+    },
+    "translations": {
+      "en": {
+        "title": "Arabic Calligraphy on Canvas",
+        "desc": "Original textured Arabic calligraphy on stretched canvas sculpted with dimensional texture paste and coated in gloss resin accents.",
+        "details": "Medium: Resin & Texture Paste on premium canvas, ready to hang with gallery-wrapped edges."
+      },
+      "ar": {
+        "title": "لوحة كانفاس بالخط العربي والريزن البارز",
+        "desc": "عمل فني تشكيلي أصيل يجمع بين الخط العربي والريزن مع معجون ملمسي ثلاثي الأبعاد على قماش الكانفاس المشدود الفاخر.",
+        "details": "الخامة: ريزن ومعجون تشكيلي بارز على كانفاس قطني 380 جم، حواف مشدودة جاهزة للتعليق الفوري."
+      },
+      "ur": {
+        "title": "کینوس پر اسلامی خطاطی (ریزن اور ٹیکسچر پیسٹ)",
+        "desc": "اعلیٰ کوالٹی کینوس پر ابھری ہوئی تھری ڈی ٹیکسچر پیسٹ اور چمکدار ریزن سے تیار کردہ دلکش اسلامی خطاطی۔",
+        "details": "خالص کینوس پر کاریگرانہ ہاتھ کا کام، گیلری ریپڈ کناروں کے ساتھ دیوار پر لٹکانے کے لیے مکمل تیار۔"
+      }
+    }
+  },
+  {
     "id": "mug-custom-02",
     "category": "custom-mugs",
     "base_price_sar": 60,

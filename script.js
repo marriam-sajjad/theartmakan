@@ -6,10 +6,48 @@
 (function () {
   'use strict';
 
+  const STORAGE_KEY_PRODUCTS = 'artmakan_products';
+  const STORAGE_KEY_ADMIN = 'artmakan_admin_mode';
+
+  // Safe Storage Wrapper (handles private browsing, file:// sandbox & quota limits)
+  const safeStorage = {
+    get(key, fallback = null) {
+      try {
+        const val = localStorage.getItem(key);
+        return val !== null ? val : fallback;
+      } catch (e) {
+        return fallback;
+      }
+    },
+    set(key, val) {
+      try {
+        localStorage.setItem(key, String(val));
+      } catch (e) {
+        console.warn('localStorage set failed:', e);
+      }
+    },
+    getJSON(key, fallback = null) {
+      try {
+        const val = localStorage.getItem(key);
+        return val ? JSON.parse(val) : fallback;
+      } catch (e) {
+        return fallback;
+      }
+    },
+    setJSON(key, val) {
+      try {
+        localStorage.setItem(key, JSON.stringify(val));
+      } catch (e) {
+        console.warn('localStorage setJSON failed:', e);
+      }
+    }
+  };
+
   // State Management
   const STATE = {
-    lang: localStorage.getItem('artmakan_lang') || 'ar', // Default Arabic for Saudi Store
-    currency: localStorage.getItem('artmakan_curr') || 'SAR',
+    lang: safeStorage.get('artmakan_lang', 'ar'), // Default Arabic for Saudi Store
+    currency: safeStorage.get('artmakan_curr', 'SAR'),
+    isAdminMode: safeStorage.get(STORAGE_KEY_ADMIN) === 'true',
     rates: {
       SAR: 1.0,
       USD: 0.266,
@@ -31,7 +69,7 @@
     sortBy: 'featured',
     currentPage: 1,
     pageSize: 12,
-    cart: JSON.parse(localStorage.getItem('artmakan_cart') || '[]'),
+    cart: safeStorage.getJSON('artmakan_cart', []),
     
     // Live Studio State
     studio: {
@@ -118,6 +156,27 @@
     DOM.mobileNavLinks = document.querySelectorAll('.mobile-nav-link, .mobile-btn-custom');
     DOM.mobileLangSelect = document.getElementById('mobile-lang-select');
     DOM.mobileCurrSelect = document.getElementById('mobile-curr-select');
+
+    // Admin & Artwork Management Elements
+    DOM.adminModeToggle = document.getElementById('admin-mode-toggle');
+    DOM.mobileAdminModeToggle = document.getElementById('mobile-admin-mode-toggle');
+    DOM.adminGalleryBar = document.getElementById('admin-gallery-bar');
+    DOM.adminAddArtBtn = document.getElementById('admin-add-art-btn');
+    DOM.adminResetCatalogBtn = document.getElementById('admin-reset-catalog-btn');
+    DOM.artManageModal = document.getElementById('art-manage-modal');
+    DOM.artManageModalTitle = document.getElementById('art-manage-modal-title');
+    DOM.artManageForm = document.getElementById('art-manage-form');
+    DOM.artFormId = document.getElementById('art-form-id');
+    DOM.artTitle = document.getElementById('art-title');
+    DOM.artPrice = document.getElementById('art-price');
+    DOM.artCategory = document.getElementById('art-category');
+    DOM.artDimensions = document.getElementById('art-dimensions');
+    DOM.artIsSoldOut = document.getElementById('art-is-sold-out');
+    DOM.artUploadDropzone = document.getElementById('art-upload-dropzone');
+    DOM.artFileInput = document.getElementById('art-file-input');
+    DOM.artPreviewImg = document.getElementById('art-preview-img');
+    DOM.artImageUrl = document.getElementById('art-image-url');
+    DOM.artCancelBtn = document.getElementById('art-manage-cancel-btn');
   }
 
   /* -------------------------------------------------------------------------
@@ -144,7 +203,7 @@
   async function setLanguage(newLang) {
     if (newLang !== 'ar' && newLang !== 'en') newLang = 'ar';
     STATE.lang = newLang;
-    localStorage.setItem('artmakan_lang', newLang);
+    safeStorage.set('artmakan_lang', newLang);
     if (DOM.langSelect) DOM.langSelect.value = newLang;
     if (DOM.mobileLangSelect) DOM.mobileLangSelect.value = newLang;
 
@@ -176,6 +235,7 @@
     renderProducts();
     renderCart();
     updateStudioPreview();
+    updateAdminUI();
   }
 
   function t(key, replacements = {}) {
@@ -191,13 +251,13 @@
      2. Multi-Currency Engine
      ------------------------------------------------------------------------- */
   async function initExchangeRates() {
-    const cached = localStorage.getItem('artmakan_rates');
-    const cachedTime = localStorage.getItem('artmakan_rates_time');
+    const cached = safeStorage.getJSON('artmakan_rates');
+    const cachedTime = safeStorage.get('artmakan_rates_time');
     const oneDay = 24 * 60 * 60 * 1000;
 
     if (cached && cachedTime && (Date.now() - Number(cachedTime) < oneDay)) {
       try {
-        STATE.rates = Object.assign(STATE.rates, JSON.parse(cached));
+        STATE.rates = Object.assign(STATE.rates, cached);
         return;
       } catch (e) {}
     }
@@ -209,8 +269,8 @@
         const json = await res.json();
         if (json && json.rates) {
           STATE.rates = Object.assign(STATE.rates, json.rates);
-          localStorage.setItem('artmakan_rates', JSON.stringify(STATE.rates));
-          localStorage.setItem('artmakan_rates_time', String(Date.now()));
+          safeStorage.setJSON('artmakan_rates', STATE.rates);
+          safeStorage.set('artmakan_rates_time', String(Date.now()));
         }
       }
     } catch (e) {
@@ -221,7 +281,7 @@
   function setCurrency(curr) {
     if (!CURRENCY_CONFIG[curr]) curr = 'SAR';
     STATE.currency = curr;
-    localStorage.setItem('artmakan_curr', curr);
+    safeStorage.set('artmakan_curr', curr);
     if (DOM.currSelect) DOM.currSelect.value = curr;
     if (DOM.mobileCurrSelect) DOM.mobileCurrSelect.value = curr;
 
@@ -250,21 +310,35 @@
   }
 
   /* -------------------------------------------------------------------------
-     3. Products Catalog Engine
+     3. Products Catalog Engine & Persistence
      ------------------------------------------------------------------------- */
   async function loadProducts() {
-    if (window.EMBEDDED_PRODUCTS && window.EMBEDDED_PRODUCTS.length > 0) {
-      STATE.products = window.EMBEDDED_PRODUCTS;
+    const cachedProducts = safeStorage.getJSON(STORAGE_KEY_PRODUCTS);
+    if (cachedProducts && Array.isArray(cachedProducts) && cachedProducts.length > 0) {
+      STATE.products = cachedProducts;
       applyFilters();
       return;
     }
+
+    if (window.EMBEDDED_PRODUCTS && window.EMBEDDED_PRODUCTS.length > 0) {
+      STATE.products = window.EMBEDDED_PRODUCTS.slice();
+      saveProducts();
+      applyFilters();
+      return;
+    }
+
     try {
       const res = await fetch('products.json');
       STATE.products = await res.json();
+      saveProducts();
       applyFilters();
     } catch (e) {
       console.error('Failed loading products.json', e);
     }
+  }
+
+  function saveProducts() {
+    safeStorage.setJSON(STORAGE_KEY_PRODUCTS, STATE.products);
   }
 
   function applyFilters() {
@@ -326,16 +400,47 @@
     visibleItems.forEach(prod => {
       const tr = prod.translations[STATE.lang] || prod.translations.en || {};
       const card = document.createElement('article');
-      card.className = 'product-card';
+      const isSoldOut = !!prod.is_sold_out;
+      card.className = 'product-card' + (isSoldOut ? ' is-sold-out' : '');
       card.setAttribute('data-id', prod.id);
 
       const categoryLabel = t(`cat_${prod.category.replace('-', '_')}`) || prod.category;
       const priceFormatted = formatPrice(prod.base_price_sar);
       const startingFromText = prod.starting_from ? `<span class="price-starting-label">${t('starting_from')}</span>` : '';
 
+      let badgeHTML = '';
+      if (isSoldOut) {
+        badgeHTML = `<span class="product-badge badge-sold-out">${t('admin_sold_out')}</span>`;
+      } else if (prod.badge) {
+        badgeHTML = `<span class="product-badge">${prod.badge}</span>`;
+      }
+
+      let actionBtnHTML = '';
+      if (isSoldOut) {
+        actionBtnHTML = `
+          <button type="button" class="btn-card-add" disabled style="opacity: 0.7; cursor: not-allowed;">
+            ${t('admin_sold_out')}
+          </button>
+        `;
+      } else {
+        actionBtnHTML = `
+          <button type="button" class="btn-card-add" data-action="add-cart" data-id="${prod.id}">
+            ${t('add_to_cart')}
+          </button>
+        `;
+      }
+
       card.innerHTML = `
+        <div class="card-admin-bar">
+          <button type="button" class="btn-card-edit" data-action="admin-edit" data-id="${prod.id}" title="${t('admin_edit')}">
+            ✏️ ${t('admin_edit')}
+          </button>
+          <button type="button" class="btn-card-delete" data-action="admin-delete" data-id="${prod.id}" title="${t('admin_delete')}">
+            🗑️ ${t('admin_delete')}
+          </button>
+        </div>
         <div class="product-image-wrapper">
-          ${prod.badge ? `<span class="product-badge">${prod.badge}</span>` : ''}
+          ${badgeHTML}
           <img src="${prod.image}" alt="${tr.title}" loading="lazy" width="600" height="600" />
           <button type="button" class="product-quick-btn" data-action="quick-view" data-id="${prod.id}">
             ${t('quick_view')}
@@ -352,9 +457,7 @@
             <span class="vat-badge-tag">${t('vat_included')}</span>
           </div>
           <div class="product-actions">
-            <button type="button" class="btn-card-add" data-action="add-cart" data-id="${prod.id}">
-              ${t('add_to_cart')}
-            </button>
+            ${actionBtnHTML}
             <button type="button" class="btn-card-wa" title="${t('order_whatsapp')}" data-action="whatsapp-order" data-id="${prod.id}">
               <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
                 <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/>
@@ -613,7 +716,7 @@
   }
 
   function saveCart() {
-    localStorage.setItem('artmakan_cart', JSON.stringify(STATE.cart));
+    safeStorage.setJSON('artmakan_cart', STATE.cart);
   }
 
   function renderCart() {
@@ -707,11 +810,17 @@
     document.body.classList.remove('cart-open');
   }
 
+  function findProduct(prodId) {
+    if (!prodId) return null;
+    const str = String(prodId).trim();
+    return STATE.products.find(p => String(p.id) === str || String(p.id) === `calligraphy-0${str}` || String(p.id) === `calligraphy-${str}` || String(p.id) === `art-${str}`);
+  }
+
   /* -------------------------------------------------------------------------
      6. Quick View & WhatsApp Ordering
      ------------------------------------------------------------------------- */
   function openQuickView(prodId) {
-    const prod = STATE.products.find(p => p.id === prodId);
+    const prod = findProduct(prodId);
     if (!prod || !DOM.quickModal) return;
 
     const tr = prod.translations[STATE.lang] || prod.translations.en || {};
@@ -760,9 +869,15 @@
           ${customInputHTML}
 
           <div class="quick-modal-actions">
-            <button type="button" class="btn btn-primary" id="quick-add-btn" style="flex: 1;">
-              ${t('add_to_cart')}
-            </button>
+            ${prod.is_sold_out ? `
+              <button type="button" class="btn btn-secondary" style="flex: 1; cursor: not-allowed; opacity: 0.7;" disabled>
+                ${t('admin_sold_out')}
+              </button>
+            ` : `
+              <button type="button" class="btn btn-primary" id="quick-add-btn" style="flex: 1;">
+                ${t('add_to_cart')}
+              </button>
+            `}
             <button type="button" class="btn btn-whatsapp" id="quick-wa-btn">
               ${t('order_whatsapp')}
             </button>
@@ -901,7 +1016,258 @@
   }
 
   /* -------------------------------------------------------------------------
-     9. Global Events Binding
+     9. Admin Mode & In-Browser Artwork Management System
+     ------------------------------------------------------------------------- */
+  let currentArtImageData = null;
+
+  function updateAdminUI() {
+    const isMode = !!STATE.isAdminMode;
+    document.body.classList.toggle('admin-mode-active', isMode);
+
+    if (DOM.adminGalleryBar) {
+      DOM.adminGalleryBar.style.display = isMode ? 'flex' : 'none';
+    }
+
+    const icon = isMode ? '🔓' : '🔒';
+    const labelKey = isMode ? 'admin_mode_exit' : 'admin_mode_toggle';
+    const labelText = t(labelKey);
+
+    [DOM.adminModeToggle, DOM.mobileAdminModeToggle].forEach(btn => {
+      if (!btn) return;
+      btn.classList.toggle('active', isMode);
+      const iconEl = btn.querySelector('.admin-icon');
+      const labelEl = btn.querySelector('.admin-label');
+      if (iconEl) iconEl.textContent = icon;
+      if (labelEl) labelEl.textContent = labelText;
+    });
+  }
+
+  function toggleAdminMode() {
+    STATE.isAdminMode = !STATE.isAdminMode;
+    safeStorage.set(STORAGE_KEY_ADMIN, String(STATE.isAdminMode));
+    updateAdminUI();
+    const notice = STATE.isAdminMode
+      ? (STATE.lang === 'ar' ? 'تم تفعيل وضع الفنان 🔓' : 'Artist Admin Mode Activated 🔓')
+      : (STATE.lang === 'ar' ? 'تم إغلاق وضع الفنان 🔒' : 'Artist Admin Mode Locked 🔒');
+    showToast(notice);
+  }
+
+  function compressImageFile(file, maxWidth = 800, quality = 0.82) {
+    return new Promise((resolve, reject) => {
+      if (!file || !file.type.startsWith('image/')) {
+        reject(new Error('Invalid image file'));
+        return;
+      }
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        const img = new Image();
+        img.onload = () => {
+          let w = img.width;
+          let h = img.height;
+          if (w > maxWidth || h > maxWidth) {
+            if (w > h) {
+              h = Math.round((h * maxWidth) / w);
+              w = maxWidth;
+            } else {
+              w = Math.round((w * maxWidth) / h);
+              h = maxWidth;
+            }
+          }
+          const canvas = document.createElement('canvas');
+          canvas.width = w;
+          canvas.height = h;
+          const ctx = canvas.getContext('2d');
+          ctx.drawImage(img, 0, 0, w, h);
+          const dataUrl = canvas.toDataURL('image/jpeg', quality);
+          resolve(dataUrl);
+        };
+        img.onerror = () => reject(new Error('Failed to load image for compression'));
+        img.src = e.target.result;
+      };
+      reader.onerror = () => reject(new Error('Failed to read file'));
+      reader.readAsDataURL(file);
+    });
+  }
+
+  function openAddArtModal() {
+    if (!DOM.artManageModal) return;
+    if (DOM.artManageForm) DOM.artManageForm.reset();
+    if (DOM.artFormId) DOM.artFormId.value = '';
+    if (DOM.artCategory) DOM.artCategory.value = 'arabic-calligraphy';
+    if (DOM.artIsSoldOut) DOM.artIsSoldOut.checked = false;
+    if (DOM.artImageUrl) DOM.artImageUrl.value = '';
+
+    currentArtImageData = null;
+    if (DOM.artPreviewImg) {
+      DOM.artPreviewImg.src = 'images/category_arabic_calligraphy.jpg';
+    }
+    if (DOM.artManageModalTitle) {
+      DOM.artManageModalTitle.textContent = t('admin_form_title_add');
+    }
+    DOM.artManageModal.classList.add('active');
+  }
+
+  function openEditArtModal(prodId) {
+    const prod = findProduct(prodId);
+    if (!prod || !DOM.artManageModal) return;
+
+    const tr = prod.translations[STATE.lang] || prod.translations.en || prod.translations.ar || {};
+
+    if (DOM.artFormId) DOM.artFormId.value = prod.id;
+    if (DOM.artTitle) DOM.artTitle.value = tr.title || '';
+    if (DOM.artPrice) DOM.artPrice.value = prod.base_price_sar || '';
+    if (DOM.artCategory) DOM.artCategory.value = prod.category || 'arabic-calligraphy';
+    if (DOM.artDimensions) DOM.artDimensions.value = tr.details || tr.desc || '';
+    if (DOM.artIsSoldOut) DOM.artIsSoldOut.checked = !!prod.is_sold_out;
+    if (DOM.artImageUrl) DOM.artImageUrl.value = prod.image || '';
+
+    currentArtImageData = prod.image || null;
+    if (DOM.artPreviewImg) {
+      DOM.artPreviewImg.src = prod.image || 'images/category_arabic_calligraphy.jpg';
+    }
+    if (DOM.artManageModalTitle) {
+      DOM.artManageModalTitle.textContent = t('admin_form_title_edit');
+    }
+
+    DOM.artManageModal.classList.add('active');
+  }
+
+  async function handleArtFileSelect(file) {
+    if (!file) return;
+    try {
+      const compressedDataUrl = await compressImageFile(file, 800, 0.82);
+      currentArtImageData = compressedDataUrl;
+      if (DOM.artPreviewImg) DOM.artPreviewImg.src = compressedDataUrl;
+      if (DOM.artImageUrl) DOM.artImageUrl.value = '';
+    } catch (err) {
+      console.warn('Image compression fallback:', err);
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        currentArtImageData = e.target.result;
+        if (DOM.artPreviewImg) DOM.artPreviewImg.src = e.target.result;
+      };
+      reader.readAsDataURL(file);
+    }
+  }
+
+  function handleArtFormSubmit(e) {
+    e.preventDefault();
+    const id = (DOM.artFormId ? DOM.artFormId.value : '').trim();
+    const title = (DOM.artTitle ? DOM.artTitle.value : '').trim();
+    const price = parseFloat(DOM.artPrice ? DOM.artPrice.value : 0) || 0;
+    const category = DOM.artCategory ? DOM.artCategory.value : 'arabic-calligraphy';
+    const dimensions = (DOM.artDimensions ? DOM.artDimensions.value : '').trim();
+    const isSoldOut = DOM.artIsSoldOut ? DOM.artIsSoldOut.checked : false;
+    const directUrl = (DOM.artImageUrl ? DOM.artImageUrl.value : '').trim();
+    const image = currentArtImageData || directUrl || 'images/category_arabic_calligraphy.jpg';
+
+    if (!title || price <= 0) {
+      showToast(STATE.lang === 'ar' ? 'يرجى إدخال اسم العمل وسعر صالح' : 'Please provide a title and valid price');
+      return;
+    }
+
+    if (id) {
+      const prod = findProduct(id);
+      if (prod) {
+        prod.base_price_sar = price;
+        prod.category = category;
+        prod.is_sold_out = isSoldOut;
+        if (image) prod.image = image;
+
+        if (!prod.translations) prod.translations = {};
+        if (!prod.translations.en) prod.translations.en = {};
+        if (!prod.translations.ar) prod.translations.ar = {};
+
+        prod.translations[STATE.lang].title = title;
+        if (dimensions) {
+          prod.translations[STATE.lang].desc = dimensions;
+          prod.translations[STATE.lang].details = dimensions;
+        }
+
+        const otherLang = STATE.lang === 'ar' ? 'en' : 'ar';
+        if (!prod.translations[otherLang].title) {
+          prod.translations[otherLang].title = title;
+          prod.translations[otherLang].desc = dimensions;
+          prod.translations[otherLang].details = dimensions;
+        }
+      }
+    } else {
+      const newId = 'art-' + Date.now();
+      const defaultDescEn = dimensions || 'Original handmade artwork crafted with precision and passion.';
+      const defaultDescAr = dimensions || 'عمل فني أصلي مصنوع يدوياً بكل إتقان وشغف في المملكة العربية السعودية.';
+
+      const newProd = {
+        id: newId,
+        category: category,
+        base_price_sar: price,
+        starting_from: false,
+        image: image,
+        badge: category === 'arabic-calligraphy' ? 'Handmade Calligraphy' : 'Original Artwork',
+        rating: 5.0,
+        reviews_count: 1,
+        is_sold_out: isSoldOut,
+        translations: {
+          en: {
+            title: title,
+            desc: defaultDescEn,
+            details: dimensions || 'Handcrafted original piece'
+          },
+          ar: {
+            title: title,
+            desc: defaultDescAr,
+            details: dimensions || 'قطعة يدوية أصلية فريدة'
+          }
+        }
+      };
+
+      STATE.products.unshift(newProd);
+    }
+
+    saveProducts();
+    if (DOM.artManageModal) DOM.artManageModal.classList.remove('active');
+    applyFilters();
+    showToast(t('admin_saved_toast'));
+  }
+
+  function deleteArtwork(prodId) {
+    const prod = findProduct(prodId);
+    if (!prod) return;
+
+    const tr = prod.translations[STATE.lang] || prod.translations.en || {};
+    const confirmMsg = `${t('admin_confirm_delete')}\n\n"${tr.title}" (${prod.base_price_sar} SAR)`;
+    if (!window.confirm(confirmMsg)) return;
+
+    STATE.products = STATE.products.filter(p => String(p.id) !== String(prod.id));
+    saveProducts();
+    applyFilters();
+    showToast(t('admin_deleted_toast'));
+  }
+
+  function resetCatalog() {
+    if (!window.confirm(t('admin_confirm_reset'))) return;
+
+    if (window.EMBEDDED_PRODUCTS && window.EMBEDDED_PRODUCTS.length > 0) {
+      STATE.products = JSON.parse(JSON.stringify(window.EMBEDDED_PRODUCTS));
+      saveProducts();
+      applyFilters();
+      showToast(t('admin_reset_toast'));
+    } else {
+      fetch('products.json')
+        .then(res => res.json())
+        .then(data => {
+          STATE.products = data;
+          saveProducts();
+          applyFilters();
+          showToast(t('admin_reset_toast'));
+        })
+        .catch(err => {
+          console.error('Reset failed:', err);
+        });
+    }
+  }
+
+  /* -------------------------------------------------------------------------
+     10. Global Events Binding
      ------------------------------------------------------------------------- */
   function bindEvents() {
     // Language Switcher
@@ -999,8 +1365,12 @@
 
           if (action === 'quick-view') {
             openQuickView(prodId);
+          } else if (action === 'admin-edit') {
+            openEditArtModal(prodId);
+          } else if (action === 'admin-delete') {
+            deleteArtwork(prodId);
           } else if (action === 'add-cart') {
-            const prod = STATE.products.find(p => p.id === prodId);
+            const prod = findProduct(prodId);
             if (prod) {
               const tr = prod.translations[STATE.lang] || prod.translations.en || {};
               addToCart({
@@ -1014,7 +1384,7 @@
               showToast(t('toast_added_to_cart'));
             }
           } else if (action === 'whatsapp-order') {
-            const prod = STATE.products.find(p => p.id === prodId);
+            const prod = findProduct(prodId);
             if (prod) sendDirectWhatsAppOrder(prod, null, null);
           }
           return;
@@ -1057,10 +1427,83 @@
     // Checkout Form Submit
     const checkoutForm = document.getElementById('checkout-form');
     if (checkoutForm) checkoutForm.addEventListener('submit', handleCheckoutSubmit);
+
+    // Admin Mode Toggles
+    if (DOM.adminModeToggle) {
+      DOM.adminModeToggle.addEventListener('click', toggleAdminMode);
+    }
+    if (DOM.mobileAdminModeToggle) {
+      DOM.mobileAdminModeToggle.addEventListener('click', () => {
+        closeMobileNav();
+        toggleAdminMode();
+      });
+    }
+
+    // Admin Gallery Action Buttons
+    if (DOM.adminAddArtBtn) {
+      DOM.adminAddArtBtn.addEventListener('click', openAddArtModal);
+    }
+    if (DOM.adminResetCatalogBtn) {
+      DOM.adminResetCatalogBtn.addEventListener('click', resetCatalog);
+    }
+
+    // Art Modal Form Submit & Cancel
+    if (DOM.artManageForm) {
+      DOM.artManageForm.addEventListener('submit', handleArtFormSubmit);
+    }
+    if (DOM.artCancelBtn) {
+      DOM.artCancelBtn.addEventListener('click', () => {
+        if (DOM.artManageModal) DOM.artManageModal.classList.remove('active');
+      });
+    }
+
+    // Image Upload & Preview Handling
+    if (DOM.artUploadDropzone && DOM.artFileInput) {
+      DOM.artUploadDropzone.addEventListener('click', () => {
+        DOM.artFileInput.click();
+      });
+
+      DOM.artUploadDropzone.addEventListener('dragover', (e) => {
+        e.preventDefault();
+        DOM.artUploadDropzone.style.borderColor = 'var(--text-main)';
+        DOM.artUploadDropzone.style.backgroundColor = '#f6f2ec';
+      });
+
+      DOM.artUploadDropzone.addEventListener('dragleave', () => {
+        DOM.artUploadDropzone.style.borderColor = '';
+        DOM.artUploadDropzone.style.backgroundColor = '';
+      });
+
+      DOM.artUploadDropzone.addEventListener('drop', (e) => {
+        e.preventDefault();
+        DOM.artUploadDropzone.style.borderColor = '';
+        DOM.artUploadDropzone.style.backgroundColor = '';
+        if (e.dataTransfer.files && e.dataTransfer.files[0]) {
+          handleArtFileSelect(e.dataTransfer.files[0]);
+        }
+      });
+
+      DOM.artFileInput.addEventListener('change', (e) => {
+        if (e.target.files && e.target.files[0]) {
+          handleArtFileSelect(e.target.files[0]);
+        }
+      });
+    }
+
+    // Image URL text input change updates preview
+    if (DOM.artImageUrl) {
+      DOM.artImageUrl.addEventListener('input', (e) => {
+        const val = e.target.value.trim();
+        if (val && DOM.artPreviewImg) {
+          DOM.artPreviewImg.src = val;
+          currentArtImageData = null;
+        }
+      });
+    }
   }
 
   /* -------------------------------------------------------------------------
-     10. Bootstrap Initialization
+     11. Bootstrap Initialization
      ------------------------------------------------------------------------- */
   async function init() {
     initDOMElements();
@@ -1068,7 +1511,7 @@
     initCustomStudio();
 
     // Auto-detect currency/language if not stored (only Arabic and English)
-    if (!localStorage.getItem('artmakan_lang')) {
+    if (!safeStorage.get('artmakan_lang')) {
       const browserLang = (navigator.language || '').toLowerCase();
       STATE.lang = browserLang.startsWith('ar') ? 'ar' : 'en';
     } else if (STATE.lang !== 'ar' && STATE.lang !== 'en') {
@@ -1079,6 +1522,7 @@
     await setLanguage(STATE.lang);
     setCurrency(STATE.currency);
     await loadProducts();
+    updateAdminUI();
   }
 
   if (document.readyState === 'loading') {

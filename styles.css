@@ -288,6 +288,60 @@ button, input, select, textarea {
   justify-content: center;
 }
 
+/* Admin Mode Lock/Unlock Toggle Buttons */
+.admin-mode-toggle {
+  background: var(--bg-secondary);
+  color: var(--text-main);
+  border: 1px solid var(--border-light);
+  padding: 8px 14px;
+  min-height: 44px;
+  border-radius: var(--radius-full);
+  font-size: 0.8125rem;
+  font-weight: 600;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  transition: var(--transition);
+  flex-shrink: 0;
+}
+
+.admin-mode-toggle:hover {
+  border-color: var(--border-dark);
+  background-color: #ffffff;
+}
+
+body.admin-mode-active .admin-mode-toggle,
+.admin-mode-toggle.active {
+  background-color: #14171a;
+  color: #ffffff;
+  border-color: var(--accent-gold);
+  box-shadow: 0 0 0 2px rgba(197, 155, 39, 0.25);
+}
+
+.mobile-admin-toggle {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-height: 44px;
+  background-color: var(--bg-subtle);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-md);
+  font-size: 0.875rem;
+  font-weight: 600;
+  cursor: pointer;
+  padding: 10px 14px;
+  transition: var(--transition);
+}
+
+body.admin-mode-active .mobile-admin-toggle {
+  background-color: #14171a;
+  color: #ffffff;
+  border-color: var(--accent-gold);
+}
+
 /* Mobile Hamburger Menu Toggle Button */
 .mobile-menu-toggle {
   display: none;
@@ -851,7 +905,7 @@ body.mobile-nav-open .mobile-nav-drawer {
   gap: 24px;
 }
 
-.product-card {
+.product-card, .art-card {
   background-color: #ffffff;
   border: 1px solid var(--border-light);
   border-radius: var(--radius-md);
@@ -862,10 +916,43 @@ body.mobile-nav-open .mobile-nav-drawer {
   position: relative;
 }
 
-.product-card:hover {
+.product-card:hover, .art-card:hover {
   transform: translateY(-4px);
   box-shadow: var(--shadow-md);
   border-color: #d1cdc5;
+}
+
+/* Standalone / Direct Art Card */
+.art-card {
+  padding: 16px;
+}
+
+.art-card img {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+  border-radius: var(--radius-sm);
+  margin-bottom: 12px;
+  background-color: #f7f6f2;
+  transition: transform 0.4s ease;
+}
+
+.art-card:hover img {
+  transform: scale(1.03);
+}
+
+.art-card h3 {
+  font-size: 1rem;
+  font-weight: 600;
+  line-height: 1.35;
+  color: var(--text-main);
+  margin-bottom: 6px;
+}
+
+.art-card p {
+  font-size: 1.125rem;
+  font-weight: 700;
+  color: var(--text-main);
 }
 
 .product-image-wrapper {
@@ -1048,6 +1135,276 @@ body.mobile-nav-open .mobile-nav-drawer {
 .pagination-wrap {
   text-align: center;
   margin-top: 48px;
+}
+
+/* ==========================================================================
+   Admin Mode & In-Browser Artwork Management
+   ========================================================================== */
+
+/* Admin Gallery Top Banner */
+.admin-gallery-bar {
+  background: #fdfaf3;
+  border: 1px dashed var(--accent-gold);
+  border-radius: var(--radius-md);
+  padding: 16px 20px;
+  margin-bottom: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+  animation: modalScale 0.25s ease-out;
+}
+
+.admin-bar-info {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.admin-badge-indicator {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--accent-terracotta);
+  font-size: 0.9375rem;
+}
+
+.admin-dot-pulse {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background-color: var(--accent-gold);
+  box-shadow: 0 0 0 0 rgba(197, 155, 39, 0.7);
+  animation: pulseGold 1.8s infinite;
+  display: inline-block;
+}
+
+@keyframes pulseGold {
+  0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(197, 155, 39, 0.7); }
+  70% { transform: scale(1); box-shadow: 0 0 0 8px rgba(197, 155, 39, 0); }
+  100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(197, 155, 39, 0); }
+}
+
+.admin-bar-hint {
+  font-size: 0.8125rem;
+  color: var(--text-muted);
+}
+
+.admin-bar-actions {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.btn-add-art {
+  background-color: var(--accent-gold);
+  color: #14171a;
+  font-weight: 700;
+  border-color: var(--accent-gold);
+  min-height: 44px;
+  padding: 10px 20px;
+}
+
+.btn-add-art:hover {
+  background-color: var(--accent-gold-hover);
+  border-color: var(--accent-gold-hover);
+}
+
+.btn-reset-catalog {
+  font-size: 0.8125rem;
+  min-height: 44px;
+  padding: 10px 16px;
+}
+
+/* Inline Card Admin Controls */
+.card-admin-bar {
+  display: none;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+  padding: 8px 12px;
+  background-color: #faf8f5;
+  border-bottom: 1px solid var(--border-light);
+  z-index: 5;
+}
+
+body.admin-mode-active .card-admin-bar {
+  display: grid;
+}
+
+.btn-card-edit {
+  background: #ffffff;
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-sm);
+  padding: 6px 10px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  min-height: 38px;
+  transition: var(--transition);
+  color: var(--text-main);
+}
+
+.btn-card-edit:hover {
+  background-color: #14171a;
+  color: #ffffff;
+  border-color: #14171a;
+}
+
+.btn-card-delete {
+  background: #fff5f5;
+  border: 1px solid #ffd4d4;
+  color: #c93b2b;
+  border-radius: var(--radius-sm);
+  padding: 6px 10px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  min-height: 38px;
+  transition: var(--transition);
+}
+
+.btn-card-delete:hover {
+  background-color: #c93b2b;
+  color: #ffffff;
+  border-color: #c93b2b;
+}
+
+/* Sold Out Badging & States */
+.product-badge.badge-sold-out {
+  background-color: rgba(179, 84, 59, 0.95);
+  color: #ffffff;
+}
+
+.product-card.is-sold-out .product-image-wrapper img {
+  filter: grayscale(35%);
+  opacity: 0.85;
+}
+
+.product-card.is-sold-out .btn-card-add {
+  background-color: var(--bg-tertiary);
+  color: var(--text-light);
+  border-color: var(--border-light);
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+/* Admin Management Modal */
+.admin-modal-window {
+  max-width: 840px;
+}
+
+.admin-form-grid {
+  display: grid;
+  grid-template-columns: 1.15fr 1fr;
+  gap: 32px;
+}
+
+.admin-form-fields {
+  display: flex;
+  flex-direction: column;
+}
+
+.admin-sold-out-row {
+  margin-top: 6px;
+  padding: 10px 14px;
+  background-color: var(--bg-subtle);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-sm);
+}
+
+.admin-checkbox-label {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+  font-size: 0.875rem;
+  font-weight: 600;
+}
+
+.admin-checkbox-label input[type="checkbox"] {
+  width: 18px;
+  height: 18px;
+  accent-color: var(--accent-terracotta);
+  cursor: pointer;
+}
+
+.admin-upload-dropzone {
+  border: 2px dashed var(--border-light);
+  border-radius: var(--radius-md);
+  padding: 8px;
+  background-color: var(--bg-subtle);
+  cursor: pointer;
+  transition: var(--transition);
+  position: relative;
+}
+
+.admin-upload-dropzone:hover {
+  border-color: var(--border-dark);
+}
+
+.admin-preview-stage {
+  position: relative;
+  aspect-ratio: 1 / 1;
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+  background-color: #f0eee9;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.admin-preview-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.admin-upload-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(20, 23, 26, 0.65);
+  color: #ffffff;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 16px;
+  text-align: center;
+  opacity: 0;
+  transition: opacity 0.2s ease;
+  backdrop-filter: blur(2px);
+}
+
+.admin-preview-stage:hover .admin-upload-overlay,
+.admin-preview-stage:focus .admin-upload-overlay,
+.admin-upload-dropzone:hover .admin-upload-overlay {
+  opacity: 1;
+}
+
+.admin-modal-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+  margin-top: 28px;
+  padding-top: 18px;
+  border-top: 1px solid var(--border-light);
+}
+
+.admin-modal-actions .btn {
+  min-height: 46px;
+  min-width: 130px;
 }
 
 /* 8. Interactive Custom Studio (CSS Only 3D Mockup Preview) */
@@ -2289,6 +2646,37 @@ body.cart-open .cart-drawer {
 
   .payment-options-grid {
     grid-template-columns: 1fr;
+  }
+
+  /* Admin Mode Mobile Layout */
+  .admin-gallery-bar {
+    flex-direction: column;
+    align-items: stretch;
+    padding: 14px;
+    gap: 12px;
+  }
+
+  .admin-bar-actions {
+    width: 100%;
+  }
+
+  .admin-bar-actions .btn {
+    flex: 1;
+  }
+
+  .admin-form-grid {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+
+  .admin-modal-actions {
+    flex-direction: column;
+    width: 100%;
+    gap: 8px;
+  }
+
+  .admin-modal-actions .btn {
+    width: 100%;
   }
 
   /* Cart Drawer */

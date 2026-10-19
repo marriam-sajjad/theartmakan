@@ -116,6 +116,12 @@
             </select>
           </div>
 
+          <!-- Admin Mode Lock/Unlock Toggle -->
+          <button type="button" id="admin-mode-toggle" class="admin-mode-toggle" title="Artist Admin Mode" aria-label="Toggle Artist Admin Mode">
+            <span class="admin-icon" aria-hidden="true">🔒</span>
+            <span class="admin-label" data-i18n="admin_mode_toggle">وضع الفنان</span>
+          </button>
+
           <!-- Shopping Bag Button -->
           <button type="button" id="cart-toggle-btn" class="cart-toggle-btn" aria-label="Open Shopping Bag">
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -197,6 +203,13 @@
             <option value="OMR">OMR (ر.ع)</option>
             <option value="BHD">BHD (د.ب)</option>
           </select>
+        </div>
+        <div class="mobile-setting-item">
+          <label class="mobile-setting-label" data-i18n="admin_mode_toggle">وضع الفنان / Artist Admin</label>
+          <button type="button" id="mobile-admin-mode-toggle" class="mobile-admin-toggle">
+            <span class="admin-icon" aria-hidden="true">🔒</span>
+            <span class="admin-label" data-i18n="admin_mode_toggle">وضع الفنان</span>
+          </button>
         </div>
       </div>
 
@@ -410,6 +423,25 @@
               <option value="price_desc" data-i18n="sort_price_desc">السعر: من الأعلى للأقل</option>
               <option value="rating" data-i18n="sort_rating">الأعلى تقييماً</option>
             </select>
+          </div>
+        </div>
+
+        <!-- Admin Management Banner / Action Bar (Shown when Admin Mode is ON) -->
+        <div id="admin-gallery-bar" class="admin-gallery-bar" style="display: none;">
+          <div class="admin-bar-info">
+            <span class="admin-badge-indicator">
+              <span class="admin-dot-pulse"></span>
+              <strong data-i18n="admin_active_mode">Artist Studio Mode Active</strong>
+            </span>
+            <span class="admin-bar-hint" data-i18n="admin_bar_hint">Manage artworks, update prices, change availability, or commission new pieces.</span>
+          </div>
+          <div class="admin-bar-actions">
+            <button type="button" id="admin-add-art-btn" class="btn btn-primary btn-add-art" data-i18n="admin_add_artwork">
+              ✨ + Add Art Piece
+            </button>
+            <button type="button" id="admin-reset-catalog-btn" class="btn btn-secondary btn-reset-catalog" data-i18n="admin_reset_catalog" title="Restore default artworks">
+              ↺ Reset Catalog
+            </button>
           </div>
         </div>
 
@@ -799,6 +831,107 @@
               </button>
             </div>
 
+          </div>
+        </form>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- 12. Art Piece Management Modal (Add / Edit Artwork) -->
+  <div id="art-manage-modal" class="modal-overlay" role="dialog" aria-modal="true">
+    <div class="modal-window admin-modal-window">
+      <button type="button" class="modal-close-x" aria-label="Close modal">✕</button>
+      <div class="modal-content-inner">
+        <div class="admin-modal-header">
+          <h2 id="art-manage-modal-title" class="checkout-section-title" data-i18n="admin_form_title_add">إضافة عمل فني جديد</h2>
+          <p class="section-subtitle" data-i18n="admin_form_subtitle" style="margin-bottom: 20px;">أدخل مواصفات العمل الفني وارفع الصورة. تُحفظ التغييرات تلقائياً في متصفحك.</p>
+        </div>
+
+        <form id="art-manage-form" class="art-manage-form">
+          <input type="hidden" id="art-form-id" name="id" value="" />
+
+          <div class="admin-form-grid">
+            <!-- Left Column: Fields -->
+            <div class="admin-form-fields">
+              
+              <!-- Title -->
+              <div class="form-row">
+                <label class="form-label" for="art-title" data-i18n="admin_field_title">عنوان العمل الفني *</label>
+                <input type="text" id="art-title" name="title" class="form-input" placeholder="مثال: لوحة خط عربي بالريزن" required />
+              </div>
+
+              <!-- Price (SAR) -->
+              <div class="form-row">
+                <label class="form-label" for="art-price" data-i18n="admin_field_price">السعر بالريال السعودي (ر.س) *</label>
+                <input type="number" id="art-price" name="price" min="1" step="1" class="form-input" placeholder="350" required />
+              </div>
+
+              <!-- Medium / Category -->
+              <div class="form-row">
+                <label class="form-label" for="art-category" data-i18n="admin_field_category">القسم / الخامة الفنية *</label>
+                <select id="art-category" name="category" class="form-select" required>
+                  <option value="arabic-calligraphy" selected data-i18n="cat_arabic_calligraphy">لوحات الخط العربي الفاخرة</option>
+                  <option value="paintings" data-i18n="cat_paintings">لوحات كانفاس أصلية</option>
+                  <option value="3d-art" data-i18n="cat_3d_art">أعمال فنية ثلاثية الأبعاد</option>
+                  <option value="clay-mugs" data-i18n="cat_clay_mugs">أكواب فخارية فنية ديكورية</option>
+                  <option value="calligraphy-mugs" data-i18n="cat_calligraphy_mugs">أكواب خط عربي يدوية</option>
+                  <option value="custom-mugs" data-i18n="cat_custom_mugs">أكواب مخصصة بالصور والكتابة</option>
+                  <option value="cushions" data-i18n="cat_cushions">وسائد مطبوعة حسب الطلب</option>
+                  <option value="t-shirts" data-i18n="cat_tshirts">قمصان تي شيرت بطباعة مخصصة</option>
+                  <option value="jewellery" data-i18n="cat_jewellery">مجوهرات وحلي فنية يدوية</option>
+                </select>
+              </div>
+
+              <!-- Dimensions / Details -->
+              <div class="form-row">
+                <label class="form-label" for="art-dimensions" data-i18n="admin_field_dimensions">المقاسات والخامات المستخدمة</label>
+                <input type="text" id="art-dimensions" name="dimensions" class="form-input" placeholder="مثال: 50x70 سم • ريزن ومعجون تشكيلي" />
+              </div>
+
+              <!-- Sold Out Status Toggle -->
+              <div class="form-row admin-sold-out-row">
+                <label class="admin-checkbox-label">
+                  <input type="checkbox" id="art-is-sold-out" name="is_sold_out" />
+                  <span class="admin-checkbox-text" data-i18n="admin_mark_sold_out">تحديد كـ (نفدت الكمية)</span>
+                </label>
+              </div>
+
+            </div>
+
+            <!-- Right Column: Image File Upload & Live Preview -->
+            <div class="admin-form-media">
+              <label class="form-label" data-i18n="admin_field_image">صورة العمل الفني (رفع أو معاينة)</label>
+              
+              <div class="admin-upload-dropzone" id="art-upload-dropzone">
+                <input type="file" id="art-file-input" accept="image/*" class="sr-only" />
+                <div class="admin-preview-stage" id="art-preview-stage">
+                  <img id="art-preview-img" src="images/category_arabic_calligraphy.jpg" alt="Preview" class="admin-preview-img" />
+                  <div class="admin-upload-overlay">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                      <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                      <polyline points="17 8 12 3 7 8"></polyline>
+                      <line x1="12" y1="3" x2="12" y2="15"></line>
+                    </svg>
+                    <span data-i18n="admin_upload_text">انقر هنا لاختيار أو إسقاط الصورة</span>
+                    <small data-i18n="admin_upload_hint">PNG, JPG, WEBP (ضغط تلقائي سريع)</small>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Optional Image URL fallback -->
+              <div class="form-row" style="margin-top: 12px;">
+                <label class="form-label" for="art-image-url" style="font-size: 0.75rem;" data-i18n="admin_field_img_url">أو مسار / رابط الصورة:</label>
+                <input type="text" id="art-image-url" name="image_url" class="form-input" style="font-size: 0.8125rem; min-height: 38px;" placeholder="images/my-art.jpg" />
+              </div>
+
+            </div>
+          </div>
+
+          <!-- Submit & Cancel Actions -->
+          <div class="admin-modal-actions">
+            <button type="button" id="art-manage-cancel-btn" class="btn btn-secondary" data-i18n="admin_cancel_btn">إلغاء</button>
+            <button type="submit" id="art-manage-submit-btn" class="btn btn-primary" data-i18n="admin_save_btn">حفظ العمل الفني</button>
           </div>
         </form>
 

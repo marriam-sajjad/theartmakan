@@ -413,6 +413,82 @@ window.EMBEDDED_PRODUCTS = [
     }
   },
   {
+    "id": "calligraphy-03",
+    "category": "arabic-calligraphy",
+    "base_price_sar": 250,
+    "starting_from": true,
+    "badge": "Handmade Resin",
+    "rating": 5.0,
+    "reviews_count": 28,
+    "image": "images/calligraphy1.jpg",
+    "has_customization": true,
+    "options": {
+      "sizes": [
+        {"name": "30x30 cm Square", "extra_sar": 0},
+        {"name": "40x40 cm Gallery Canvas", "extra_sar": 80},
+        {"name": "50x50 cm Statement Piece", "extra_sar": 160}
+      ],
+      "materials": ["Epoxy Resin & 24K Gold Leaf on Solid Wood Canvas"],
+      "allow_text": true,
+      "allow_photo": false
+    },
+    "translations": {
+      "en": {
+        "title": "Resin & Gold Leaf Calligraphy",
+        "desc": "Stunning handcrafted Arabic calligraphy preserved in crystal clear epoxy resin with genuine shimmering gold leaf accents on solid wood.",
+        "details": "UV-resistant high-gloss resin, ready to hang, handmade in Saudi Arabia."
+      },
+      "ar": {
+        "title": "لوحة خط عربي بالريزن وورق الذهب",
+        "desc": "لوحة فنية فاخرة تجمع بين سحر الخط العربي ولمعان ورق الذهب عيار 24 مع طبقات الريزن الشفاف على خشب متين.",
+        "details": "مقاومة للأشعة فوق البنفسجية بلمعان زجاجي فائق، جاهزة للتعليق مباشرة، صُنع يدوي في السعودية."
+      },
+      "ur": {
+        "title": "ریزین اور گولڈ لیف اسلامی خطاطی",
+        "desc": "خالص لکڑی کے کینوس پر چمکدار 24K گولڈ لیف اور کرسٹل کلیئر ریزن کی تہوں سے مزین باوقار اسلامی خطاطی۔",
+        "details": "یو وی ریزسٹنٹ ہائی گلوس فنش، فوری لٹکانے کے لیے تیار، سعودی کاریگروں کی ہاتھ سے بنائی گئی تخلیق۔"
+      }
+    }
+  },
+  {
+    "id": "calligraphy-04",
+    "category": "arabic-calligraphy",
+    "base_price_sar": 350,
+    "starting_from": true,
+    "badge": "Original Canvas",
+    "rating": 4.9,
+    "reviews_count": 34,
+    "image": "images/art4.jpg",
+    "has_customization": true,
+    "options": {
+      "sizes": [
+        {"name": "50x70 cm Canvas", "extra_sar": 0},
+        {"name": "70x100 cm Large Canvas", "extra_sar": 150},
+        {"name": "90x120 cm Statement Canvas", "extra_sar": 300}
+      ],
+      "materials": ["Heavy 380gsm Cotton Canvas", "Resin & Architectural Texture Paste", "Acrylic & Gold Accents"],
+      "allow_text": true,
+      "allow_photo": false
+    },
+    "translations": {
+      "en": {
+        "title": "Arabic Calligraphy on Canvas",
+        "desc": "Original textured Arabic calligraphy on stretched canvas sculpted with dimensional texture paste and coated in gloss resin accents.",
+        "details": "Medium: Resin & Texture Paste on premium canvas, ready to hang with gallery-wrapped edges."
+      },
+      "ar": {
+        "title": "لوحة كانفاس بالخط العربي والريزن البارز",
+        "desc": "عمل فني تشكيلي أصيل يجمع بين الخط العربي والريزن مع معجون ملمسي ثلاثي الأبعاد على قماش الكانفاس المشدود الفاخر.",
+        "details": "الخامة: ريزن ومعجون تشكيلي بارز على كانفاس قطني 380 جم، حواف مشدودة جاهزة للتعليق الفوري."
+      },
+      "ur": {
+        "title": "کینوس پر اسلامی خطاطی (ریزن اور ٹیکسچر پیسٹ)",
+        "desc": "اعلیٰ کوالٹی کینوس پر ابھری ہوئی تھری ڈی ٹیکسچر پیسٹ اور چمکدار ریزن سے تیار کردہ دلکش اسلامی خطاطی۔",
+        "details": "خالص کینوس پر کاریگرانہ ہاتھ کا کام، گیلری ریپڈ کناروں کے ساتھ دیوار پر لٹکانے کے لیے مکمل تیار۔"
+      }
+    }
+  },
+  {
     "id": "mug-custom-02",
     "category": "custom-mugs",
     "base_price_sar": 60,
@@ -574,7 +650,36 @@ window.EMBEDDED_LOCALES = {
   "artist_about_desc": "I am the artist behind The Art Makan. Creating authentic original paintings, hand-moulded botanical clay mugs, illuminated Arabic calligraphy, and personalized art treasures right here in Saudi Arabia. Every piece is made with soul and devotion to beauty.",
   "instagram_shop_label": "@the_art_makan (Shop)",
   "instagram_portfolio_label": "@marriamsajjad_artistry (Art Portfolio)",
-  "follow_my_work": "Connect With Me"
+  "follow_my_work": "Connect With Me",
+  "admin_mode_toggle": "Artist Admin",
+  "admin_mode_exit": "Exit Admin",
+  "admin_active_mode": "Artist Studio Mode Active",
+  "admin_bar_hint": "Manage artworks, update prices, change availability, or commission new pieces.",
+  "admin_add_artwork": "+ Add Art Piece",
+  "admin_reset_catalog": "↺ Reset Catalog",
+  "admin_edit": "Edit",
+  "admin_delete": "Delete",
+  "admin_sold_out": "Sold Out",
+  "admin_in_stock": "In Stock",
+  "admin_mark_sold_out": "Mark as Sold Out",
+  "admin_form_title_add": "Add New Art Piece",
+  "admin_form_title_edit": "Edit Art Piece",
+  "admin_form_subtitle": "Update artwork details and image. Saved directly to your browser storage.",
+  "admin_field_title": "Artwork Title *",
+  "admin_field_price": "Price in SAR (ر.س) *",
+  "admin_field_category": "Category / Medium *",
+  "admin_field_dimensions": "Dimensions & Medium",
+  "admin_field_image": "Artwork Image (Upload or Preview)",
+  "admin_field_img_url": "Or Image File Path / URL:",
+  "admin_upload_text": "Click or drag image to upload",
+  "admin_upload_hint": "PNG, JPG, WEBP (auto-compressed)",
+  "admin_save_btn": "Save Artwork",
+  "admin_cancel_btn": "Cancel",
+  "admin_confirm_delete": "Are you sure you want to delete this artwork?",
+  "admin_confirm_reset": "Are you sure you want to reset the catalog to original default items?",
+  "admin_saved_toast": "Artwork saved successfully!",
+  "admin_deleted_toast": "Artwork deleted from gallery!",
+  "admin_reset_toast": "Catalog restored to default items!"
 }
 ,
   ar: {
@@ -699,7 +804,36 @@ window.EMBEDDED_LOCALES = {
   "artist_about_desc": "أنا الفنانة وراء المكان للفنون. أبتكر لوحات فنية أصلية، وأكواب فخارية نباتية منحوتة، ولوحات خط عربي فاخرة بماء الذهب، وقطعاً مخصصة بشغف هنا في المملكة العربية السعودية. كل قطعة تُصنع بروح فنية خالصة تفيض بالجمال.",
   "instagram_shop_label": "@the_art_makan (المتجر)",
   "instagram_portfolio_label": "@marriamsajjad_artistry (معرض أعمالي الفنية)",
-  "follow_my_work": "تابعوا إبداعاتي"
+  "follow_my_work": "تابعوا إبداعاتي",
+  "admin_mode_toggle": "وضع الفنان",
+  "admin_mode_exit": "إنهاء الإدارة",
+  "admin_active_mode": "لوحة إدارة الفنان مفعلة",
+  "admin_bar_hint": "يمكنك إضافة أعمال فنية جديدة، تعديل الأسعار، تحديد حالة التوفر، أو حذف القطع مباشرة.",
+  "admin_add_artwork": "✨ + إضافة عمل فني جديد",
+  "admin_reset_catalog": "↺ استعادة الكتالوج الافتراضي",
+  "admin_edit": "تعديل",
+  "admin_delete": "حذف",
+  "admin_sold_out": "نفدت الكمية",
+  "admin_in_stock": "متوفر",
+  "admin_mark_sold_out": "تحديد كـ (نفدت الكمية)",
+  "admin_form_title_add": "إضافة عمل فني جديد",
+  "admin_form_title_edit": "تعديل بيانات العمل الفني",
+  "admin_form_subtitle": "أدخل مواصفات العمل الفني وارفع الصورة. تُحفظ التغييرات تلقائياً في متصفحك.",
+  "admin_field_title": "عنوان العمل الفني *",
+  "admin_field_price": "السعر بالريال السعودي (ر.س) *",
+  "admin_field_category": "القسم / الخامة الفنية *",
+  "admin_field_dimensions": "المقاسات والخامات المستخدمة",
+  "admin_field_image": "صورة العمل الفني (رفع أو معاينة)",
+  "admin_field_img_url": "أو مسار / رابط الصورة:",
+  "admin_upload_text": "انقر هنا لاختيار أو إسقاط الصورة",
+  "admin_upload_hint": "PNG, JPG, WEBP (ضغط تلقائي سريع)",
+  "admin_save_btn": "حفظ العمل الفني",
+  "admin_cancel_btn": "إلغاء",
+  "admin_confirm_delete": "هل أنت متأكد من رغبتك في حذف هذا العمل الفني؟",
+  "admin_confirm_reset": "هل أنت متأكد من استعادة الكتالوج الافتراضي وحذف التعديلات؟",
+  "admin_saved_toast": "تم حفظ العمل الفني وتحديث المعرض بنجاح!",
+  "admin_deleted_toast": "تم حذف العمل الفني من المعرض!",
+  "admin_reset_toast": "تمت استعادة الكتالوج الافتراضي بنجاح!"
 }
 ,
   ur: {
